@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/prateekbh/riot-tagrouter/issues"
   },
-  "homepage": "https://github.com/prateekbh/riot-tagrouter#readme"
+  "homepage": "https://github.com/prateekbh/riot-tagrouter#readme",
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-preset-es2015": "^6.14.0",
+    "riot": "^2.6.1",
+    "tag-loader": "^0.3.0"
+  }
 }
