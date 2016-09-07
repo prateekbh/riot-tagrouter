@@ -2,7 +2,9 @@
 		<yield></yield>
 		<script>
 				this.on('mount',(e)=>{
-						this.parent && this.parent.setRoute && this.parent.setRoute(this.opts.path, this.opts.component );
+						if(Object.keys(this.tags).length===0){
+							this.parent && this.parent.setRoute && this.parent.setRoute(this.opts.path, this.opts.component );
+						}
 				});
 
 				//recursive function provider

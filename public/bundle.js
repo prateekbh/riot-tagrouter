@@ -54,13 +54,19 @@
 
 	var _route2 = _interopRequireDefault(_route);
 
+	var _appRouter = __webpack_require__(5);
+
+	var _appRouter2 = _interopRequireDefault(_appRouter);
+
 	var _riot = __webpack_require__(2);
 
 	var _riot2 = _interopRequireDefault(_riot);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	_riot2.default.mount('router');
+	_riot2.default.mount('app-routes');
+	_riot2.default.route('user/profile/prateek1');
+	window.riot = _riot2.default;
 
 /***/ },
 /* 1 */
@@ -70,13 +76,46 @@
 
 	var riot = __webpack_require__(2);
 
-	riot.tag2('router', '<yield></yield>', '', '', function (opts) {
+	riot.tag2('router', '<yield></yield> <div class="riot-root"> </div>', '', '', function (opts) {
+	    var _this = this;
+
+	    var $appRoot = null;
+	    var currTag = null;
+
+	    function unmountCurrRoute() {
+	        if (currTag) {
+	            console.log(currTag);
+	            debugger;
+	        }
+	    }
+
+	    function createRouteWithTagName(tagName) {
+	        $appRoot.innerHTML = '<' + tagName + ' class="route-' + tagName + '"></' + tagName + '>';
+	        var mountedTag = riot.mount(tagName + '.' + tagName);
+	        if (mountedTag.length === 0) {
+	            throw new Error('Riot Element Not Found');
+	        } else {
+	            unmountCurrRoute();
+	            currTag = mountedTag[0];
+	        }
+	    }
+
+	    function changeRoute(newRoute) {
+	        if (typeof newRoute === 'string') {
+	            createRouteWithTagName(newRoute);
+	        } else if (window.Promise && Promise.resolve(newRoute) === newRoute) {}
+	    }
+
 	    this.setRoute = function (path, component) {
-	        console.log(path, component);
+	        riot.route(path, function () {
+	            changeRoute(component);
+	        });
 	    };
 
 	    this.on('mount', function (e) {
 	        console.log('router mounted');
+	        $appRoot = _this.root.querySelector('.riot-root');
+	        riot.route.start(true);
 	    });
 	});
 
@@ -2775,12 +2814,32 @@
 		var _this = this;
 
 		this.on('mount', function (e) {
-			_this.parent && _this.parent.setRoute && _this.parent.setRoute(_this.opts.path, _this.opts.component);
+			if (Object.keys(_this.tags).length === 0) {
+				_this.parent && _this.parent.setRoute && _this.parent.setRoute(_this.opts.path, _this.opts.component);
+			}
 		});
 
 		this.setRoute = function (path, component) {
 			this.parent && this.parent.setRoute && this.parent.setRoute(this.opts.path + path, component);
 		};
+	});
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _router = __webpack_require__(1);
+
+	var _router2 = _interopRequireDefault(_router);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var riot = __webpack_require__(2);
+
+	riot.tag2('app-routes', '<router> <route path="user" component="user"> <route path="/profile/*" component="{prplFunc}"></route> </route> </router>', '', '', function (opts) {
+	        this.prplFunc = new Promise(function (a, b) {});
 	});
 
 /***/ }
