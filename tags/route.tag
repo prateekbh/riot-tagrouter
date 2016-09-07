@@ -1,13 +1,13 @@
 <route>
+		<yield></yield>
 		<script>
 				this.on('mount',(e)=>{
-						//this.parent.setRoute(this.opts.path)
-						console.log('mounting',this.opts);
+						this.parent && this.parent.setRoute && this.parent.setRoute(this.opts.path, this.opts.component );
 				});
 
 				//recursive function provider
 				this.setRoute = function(path, component){
-					console.log('sending',this.opts);
+					this.parent && this.parent.setRoute && this.parent.setRoute(this.opts.path + path, component );
 				}
 		</script>
 </route>
