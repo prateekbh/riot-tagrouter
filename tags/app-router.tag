@@ -4,6 +4,7 @@ import router from './router.tag';
     <router>
         <route path='user' component='user'>
             <route path='/profile/*' component={prplFunc}></route>
+            <route path='/profile/*/sent/*' component={prplFunc}></route>
         </route>
     </router>
     <script>
