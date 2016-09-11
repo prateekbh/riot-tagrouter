@@ -17,7 +17,7 @@
             }
         }
 
-        function createRouteWithTagName(tagName, routeparams){
+        function createRouteWithTagName(tagName){
             $appRoot.innerHTML = '<'+tagName+' class="route-'+tagName+'"></'+tagName+'>';
             var mountedTag = riot.mount(tagName+'.'+tagName);
             if(mountedTag.length === 0){
@@ -29,18 +29,17 @@
             }
         }
 
-        function changeRoute(newRoute, routeparams){
+        function changeRoute(newRoute){
             if(typeof(newRoute) === 'string'){
-                createRouteWithTagName(newRoute, routeparams);
+                createRouteWithTagName(newRoute);
             } else if (window.Promise && Promise.resolve(newRoute) === newRoute){
                 //PRPL function
             }
         }
 
         this.setRoute = function(path, component){
-            riot.route(path,function(){
-								this.routeParams = arguments && arguments || [];
-                changeRoute(component,arguments); 
+            riot.route(path,() => {
+                changeRoute(component); 
             });
         }
 

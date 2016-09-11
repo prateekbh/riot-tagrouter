@@ -17,7 +17,7 @@ The API is kept pretty clean and minimal, a minimal router config would be decla
 ``` html
     <router base-route='/'>
         <route path='/' component='home'></route>
-        <route path='/user/*' component='user-profile'></route>
+        <route path='/user/:user' component='user-profile'></route>
         <route path='/messages'>
             <route path='/inbox' component='msg-inbox'></route>
             <route path='/sent' component='msg-sent'></route>
@@ -60,8 +60,12 @@ This router as promised also has first class support for lazy loaded routes agai
 Create a custom element like 'link' in react-router to ensure navigation does not trigger a full refresh, also need to check if we can create a custom element named 'link' cuz react.mount('*') might conflict with link tags
 
 ##Route values to components
-TBD, this gets complicatd as now to pass the values to the component
+The component specified in the route tag(or passed via promise) will recieve all the route params in opts of the component.
+
+e.g. in above example, path '/user/:user' the component 'user-profile' wil recieve an opts 'user' with the route value.
 
 ##Errors
 TBD, how to propagate errors if the component is not available
 
+###Note
+All ':slugs' are replaced by * internally, you can however use all the rules that you can use in riot router, however url params will be passed as oopts only for ':slug' keys
