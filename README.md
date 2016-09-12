@@ -1,5 +1,4 @@
 # riot-tagrouter
-__________________
 
 Riot js comes with a pretty rock solid [router](http://riotjs.com/api/route/) along with the library file. 
 This router however is purely imperitive and maintaining it in a large codebase can go out of hand pretty easily.
@@ -64,9 +63,10 @@ e.g. in above example, path '/user/:user' the component 'user-profile' wil recie
 
 ##Events
 Following two events will be published on 'Router' tag's tag defination(using .trigger) and also via .opts (i.e. 'on-' attributes)
-1.) Route Changed: Whenever the route is changing a 'routeChange' event will be triggered on the tag implementation and also if a function is passed to 'on-routechange' attribute
+
+1. Route Changed: Whenever the route is changing a 'routeChange' event will be triggered on the tag implementation and also if a function is passed to 'on-routechange' attribute
 then that will be called too.
-2.) Tag not found: Whenever a while mounting a tag is not found a 'tagNotFound' event will be triggered on the tag implementation and also if a function is passed to 'on-tagnotfound' attribute
+2. Tag not found: Whenever a while mounting a tag is not found a 'tagNotFound' event will be triggered on the tag implementation and also if a function is passed to 'on-tagnotfound' attribute
 then that will be called too.
 
 ###Note
