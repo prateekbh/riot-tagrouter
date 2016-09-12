@@ -5,10 +5,11 @@
     <div class="riot-root">
     </div>
     <script>
+				var self = this;
         var $appRoot = null;
         var currTag = null;
 
-        this.routeParams = {};
+        var routeParams = {};
 
         function unmountCurrRoute(){
             if(currTag){
@@ -18,13 +19,32 @@
         }
 
         function createRouteWithTagName(tagName){
-            $appRoot.innerHTML = '<'+tagName+' class="route-'+tagName+'"></'+tagName+'>';
+						//construct the tag
+						var tag = '<'+tagName+' class="route-'+tagName+'" ';
+						for(var param in routeParams){
+							tag = tag + param + '="' + routeParams[param] + '" ';
+						}
+						tag = tag + '></'+tagName+'>';
+
+						//remove current tag
+						unmountCurrRoute();
+
+						//mount new tag
+						$appRoot.innerHTML = tag;
             var mountedTag = riot.mount(tagName+'.'+tagName);
             if(mountedTag.length === 0){
-                throw (new Error('Riot Element Not Found')); 
+								self.trigger('tagNotFound',tagName);
+								if(self.opts['on-tagnotfound'] && self.opts['on-tagnotfound'] instanceof Function){
+									self.opts['on-tagnotfound'](tagName);
+								}
+								//right now throwing this error halts the entire router
+                //throw (new Error('Riot Element Not Found')); 
             }
             else{
-                unmountCurrRoute();
+								self.trigger('routeChanged',tagName);
+								if(self.opts['on-routechange'] && self.opts['on-routechange'] instanceof Function){
+									self.opts['on-routechange'](tagName);
+								}
                 currTag = mountedTag[0];
             }
         }
@@ -32,10 +52,13 @@
         function changeRoute(newRoute){
             if(typeof(newRoute) === 'string'){
                 createRouteWithTagName(newRoute);
-            } else if (window.Promise && Promise.resolve(newRoute) === newRoute){
-                //PRPL function
+            } else if ((window.Promise) && (newRoute instanceof window.Promise)){
+                newRoute.then(tagName  => {
+									createRouteWithTagName(tagName);
+								});
             }
         }
+
 
         this.setRoute = function(path, component){
             (function(path, component){
@@ -53,13 +76,13 @@
 								//actual callback
                 riot.route(path,function() {
 										//empty the route params
-										this.routeParams={};
+										routeParams={};
 
 										//build the new route param dictionary
 										params.forEach((param,index) => {
-											this.routeParams[param] = arguments[index];
+											routeParams[param] = arguments[index];
 										});
-										console.log(this.routeParams);
+
 										//change route
                     changeRoute(component); 
                 });

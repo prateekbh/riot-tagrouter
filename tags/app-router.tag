@@ -2,11 +2,11 @@ import router from './router.tag';
 
 <app-routes>
     <router>
-        <route path='user' component='user'>
-            <route path='/profile/:user' component={prplFunc}></route>
+        <route path='user'>
+            <route path='/profile/:user' component='tag-user'></route>
         </route>
-        <route path='messages' component='user'>
-            <route path='/:from-:to' component={prplFunc}></route>
+        <route path='messages'>
+            <route path='/:from-:to' component='tag-msgs'></route>
         </route>
     </router>
     <script>

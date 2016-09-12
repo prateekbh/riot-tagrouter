@@ -28,7 +28,7 @@ The API is kept pretty clean and minimal, a minimal router config would be decla
 This router as promised also has first class support for lazy loaded routes again in a declarative way. The component attribute of the router takes one of the two parameter
 
  1. A string type name of the component to be mounted
- 2. A function which returns a promise which returns a promise, this promise at the end needs to be resolved with a string type name of the component
+ 2. A Promise which at the end needs to be resolved with a string type name of the component
 
 ``` html
 	<router base-route='/'>
