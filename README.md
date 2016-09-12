@@ -64,10 +64,10 @@ e.g. in above example, path '/user/:user' the component 'user-profile' wil recie
 ##Events
 Following two events will be published on 'Router' tag's tag defination(using .trigger) and also via .opts (i.e. 'on-' attributes)
 
-1. Route Changed: Whenever the route is changing a 'routeChange' event will be triggered on the tag implementation and also if a function is passed to 'on-routechange' attribute
+1. *Route Changed*: Whenever the route is changing a 'routeChange' event will be triggered on the tag implementation and also if a function is passed to 'on-routechange' attribute
 then that will be called too.
-2. Tag not found: Whenever a while mounting a tag is not found a 'tagNotFound' event will be triggered on the tag implementation and also if a function is passed to 'on-tagnotfound' attribute
+2. *Tag not found*: Whenever a while mounting a tag is not found a 'tagNotFound' event will be triggered on the tag implementation and also if a function is passed to 'on-tagnotfound' attribute
 then that will be called too.
 
 ###Note
-All ':slugs' are replaced by * internally, you can however use all the rules that you can use in riot router, however url params will be passed as oopts only for ':slug' keys
+All '*:slugs*' are replaced by '\*' internally, you can however use all the rules that you can use in riot router, however url params will be passed as oopts only for '*:slug*' keys

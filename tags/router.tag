@@ -8,7 +8,7 @@
         var $appRoot = null;
         var currTag = null;
 
-        this.routeParams = [];
+        this.routeParams = {};
 
         function unmountCurrRoute(){
             if(currTag){
@@ -38,9 +38,32 @@
         }
 
         this.setRoute = function(path, component){
-            riot.route(path,() => {
-                changeRoute(component); 
-            });
+            (function(path, component){
+
+                //regex to take out :slugs
+								var tokenRegExp = /:([a-z]*)/ig;
+
+								//take out slugs as keys
+            		var params = path.match(tokenRegExp);
+								params = params.map(param=> param.length>0 ? param.substring(1): '');
+
+								//converting to riot router understandable format
+								path = path.replace(tokenRegExp,'*');
+								
+								//actual callback
+                riot.route(path,function() {
+										//empty the route params
+										this.routeParams={};
+
+										//build the new route param dictionary
+										params.forEach((param,index) => {
+											this.routeParams[param] = arguments[index];
+										});
+										console.log(this.routeParams);
+										//change route
+                    changeRoute(component); 
+                });
+            })(path, component)
         }
 
         this.on('mount',(e)=>{
