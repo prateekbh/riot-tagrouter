@@ -19,8 +19,7 @@ The API is kept pretty clean and minimal, a minimal router config would be decla
         <route path='/' component='home'></route>
         <route path='/user/:user' component='user-profile'></route>
         <route path='/messages'>
-            <route path='/inbox' component='msg-inbox'></route>
-            <route path='/sent' component='msg-sent'></route>
+            <route path='/:from-:to' component='msg-component'></route>
         </route>
     </router>
 ```
@@ -37,18 +36,17 @@ This router as promised also has first class support for lazy loaded routes agai
         <route path='/' component='home'></route>
         <route path='/user/*' component='user-profile'></route>
         <route path='/messages'>
-            <route path='/inbox' component='msg-inbox'></route>
-            <route path='/sent' component={getOutboxComponent}></route>
+            <route path='/:from-:to' component={getMessegesComponent}></route>
         </route>
     </router>
     .
     .
     .
     <script>
-	    this.getOutboxComponent = function (){
+	    this.getMessegesComponent = function (){
 		    return new Promise((resolve,reject){
 			    //some webpack or require magic here to load the tags now
-			    resolve('msg-sent');
+			    resolve('msg-component');
 		    });
 		}
     </script>
@@ -64,8 +62,12 @@ The component specified in the route tag(or passed via promise) will recieve all
 
 e.g. in above example, path '/user/:user' the component 'user-profile' wil recieve an opts 'user' with the route value.
 
-##Errors
-TBD, how to propagate errors if the component is not available
+##Events
+Following two events will be published on 'Router' tag's tag defination(using .trigger) and also via .opts (i.e. 'on-' attributes)
+1.) Route Changed: Whenever the route is changing a 'routeChange' event will be triggered on the tag implementation and also if a function is passed to 'on-routechange' attribute
+then that will be called too.
+2.) Tag not found: Whenever a while mounting a tag is not found a 'tagNotFound' event will be triggered on the tag implementation and also if a function is passed to 'on-tagnotfound' attribute
+then that will be called too.
 
 ###Note
 All ':slugs' are replaced by * internally, you can however use all the rules that you can use in riot router, however url params will be passed as oopts only for ':slug' keys
