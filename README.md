@@ -58,7 +58,7 @@ This router as promised also has first class support for lazy loaded routes agai
 *<navigate>* element bundled with this package uses *riot.route* internally to navigate to any route, for a11y purpose all navigate elements will be '<a>' tags.  
 
 ``` html
-    <navigate to='/user/john'>
+    <navigate to='/user/john' title='John' replace={true}>
         <svg>
         .
         .
