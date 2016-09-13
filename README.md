@@ -25,6 +25,7 @@ The API is kept pretty clean and minimal, a minimal router config would be decla
 
 > in the above example base-route will be the route base customizable as per the [riot router](http://riotjs.com/api/route/), this sets the root url for your entire app.
 
+
 This router as promised also has first class support for lazy loaded routes again in a declarative way. The component attribute of the router takes one of the two parameter
 
  1. A string type name of the component to be mounted
@@ -35,7 +36,7 @@ This router as promised also has first class support for lazy loaded routes agai
         <route path='/' component='home'></route>
         <route path='/user/*' component='user-profile'></route>
         <route path='/messages'>
-            <route path='/:from-:to' component={getMessegesComponent}></route>
+            <route path='/:from-:to' component={getMessegesComponent()}></route>
         </route>
     </router>
     .
@@ -54,8 +55,17 @@ This router as promised also has first class support for lazy loaded routes agai
 > see [Lazy Loading your Riotjs SPA](medium.com/@prateek.bh/lazy-loading-your-riotjs-spa-5f4e73011663) for hints on webpack stuff
 
 ##Custom navigation element
-Create a custom element like 'link' in react-router to ensure navigation does not trigger a full refresh, also need to check if we can create a custom element named 'link' cuz react.mount('*') might conflict with link tags
+*<navigate>* element bundled with this package uses *riot.route* internally to navigate to any route, for a11y purpose all navigate elements will be '<a>' tags.  
 
+``` html
+    <navigate to='/user/john'>
+        <svg>
+        .
+        .
+        .
+        </svg>
+    </navigate>
+```
 ##Route values to components
 The component specified in the route tag(or passed via promise) will recieve all the route params in opts of the component.
 
@@ -68,6 +78,9 @@ Following two events will be published on 'Router' tag's tag defination(using .t
 then that will be called too.
 2. *Tag not found*: Whenever a while mounting a tag is not found a 'tagNotFound' event will be triggered on the tag implementation and also if a function is passed to 'on-tagnotfound' attribute
 then that will be called too.
+
+##Usage
+Tell ppl how can this be added in their project? (script tags, webpack, grunt etc)
 
 ###Note
 All '*:slugs*' are replaced by '\*' internally, you can however use all the rules that you can use in riot router, however url params will be passed as oopts only for '*:slug*' keys
