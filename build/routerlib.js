@@ -47,13 +47,15 @@ riot.tag2('router', '<div class="route-container"><yield></yield></div><div clas
 				unmountCurrRoute();
 
 				$appRoot.innerHTML = tag;
-				var mountedTag = riot.mount(tagName + '.' + tagName);
+				var mountedTag = riot.mount(tagName + '.route-' + tagName);
 				if (mountedTag.length === 0) {
+						console.log('nf');
 						self.trigger('tagNotFound', tagName);
 						if (self.opts['on-tagnotfound'] && self.opts['on-tagnotfound'] instanceof Function) {
 								self.opts['on-tagnotfound'](tagName);
 						}
 				} else {
+						console.log('f');
 						self.trigger('routeChanged', tagName);
 						if (self.opts['on-routechange'] && self.opts['on-routechange'] instanceof Function) {
 								self.opts['on-routechange'](tagName);
@@ -87,15 +89,18 @@ riot.tag2('router', '<div class="route-container"><yield></yield></div><div clas
 						riot.route(path, function () {
 								var _arguments = arguments;
 
+								console.log('exec parsed', path);
 
 								routeParams = {};
 
-								params.forEach(function (param, index) {
+								params && params.forEach(function (param, index) {
 										routeParams[param] = _arguments[index];
 								});
 
 								changeRoute(component);
 						});
+
+						riot.route.start(true);
 				})(path, component);
 		};
 
@@ -105,9 +110,7 @@ riot.tag2('router', '<div class="route-container"><yield></yield></div><div clas
 						var routeContainer = _this2.root.querySelector('.route-container');
 						routeContainer.remove && routeContainer.remove();
 				}
-
 				$appRoot = _this2.root.querySelector('.riot-root');
-				riot.route.start(true);
 		});
 });
 //# sourceMappingURL=routerlib.js.map

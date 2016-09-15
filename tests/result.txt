@@ -1,0 +1,6 @@
+1..1
+ok 1 Router Test Suite =>  dummy test:  Actions are there
+# tests 1
+# pass 1
+# fail 0
+

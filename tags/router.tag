@@ -31,7 +31,7 @@
 
 					//mount new tag
 					$appRoot.innerHTML = tag;
-					var mountedTag = riot.mount(tagName+'.'+tagName);
+					var mountedTag = riot.mount(tagName+'.route-'+tagName);
 					if(mountedTag.length === 0){
 							self.trigger('tagNotFound',tagName);
 							if(self.opts['on-tagnotfound'] && self.opts['on-tagnotfound'] instanceof Function){
@@ -68,24 +68,29 @@
 
 							//take out slugs as keys
 							var params = path.match(tokenRegExp);
-							params = params && params.map(param=> param.length>0 ? param.substring(1): '') || params;
+							params = params && params.map(param => param.length>0 ? param.substring(1): '') || params;
 
 							//converting to riot router understandable format
 							path = path.replace(tokenRegExp,'*');
 							
 							//actual callback
 							riot.route(path,function() {
+									console.log('exec parsed',path);
 									//empty the route params
 									routeParams={};
 
 									//build the new route param dictionary
-									params.forEach((param,index) => {
+									params && params.forEach((param,index) => {
 										routeParams[param] = arguments[index];
 									});
 
 									//change route
 									changeRoute(component); 
 							});
+
+							//start the router
+							//riot.route.start does not do exec everytime so you can be safe about the fact that callback will be called multiple times
+							riot.route.start(true);
 					})(path, component)
 			}
 
@@ -95,9 +100,9 @@
 						var routeContainer = this.root.querySelector('.route-container');
 						routeContainer.remove && routeContainer.remove();
 					}
-
 					$appRoot = this.root.querySelector('.riot-root');
-					riot.route.start(true);
+					
 			});
     </script>
 </router>
+

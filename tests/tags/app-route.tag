@@ -1,5 +1,19 @@
+<home>
+    <h1> home </h1>
+	<navigate to='/user/profile/prateek'>Prateek</navigate>
+</home>
+
+<msg-component>
+    <h1> message component </h1>
+</msg-component>
+
+<user-component>
+    <h1>user component</h1>
+</user-component>
+
 <app-route>
-		<router>
+		<router show-routes={true}>
+				<route path='/' component='home'></route>
 				<route path='user'>
 						<route path='/profile/:user' component='user-component'></route>
 				</route>
@@ -7,6 +21,7 @@
 						<route path='/outbox' component='msg-outbox'></route>
 						<route path='/:from-:to' component='{prplFunc}'></route>
 				</route>
+				<dummy></dummy>
 		</router>
 		<script>
 				this.prplFunc=function(){
@@ -18,10 +33,3 @@
 		</script>
 </app-route>
 
-<msg-component>
-    <h1> message component </h1>
-</msg-component>
-
-<user-component>
-    <h1>user component</h1>
-</user-component>

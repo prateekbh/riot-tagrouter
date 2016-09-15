@@ -41,8 +41,9 @@ riot.tag2('router', '<div class="route-container"><yield></yield></div><div clas
 					unmountCurrRoute();
 
 					$appRoot.innerHTML = tag;
-					var mountedTag = riot.mount(tagName+'.'+tagName);
+					var mountedTag = riot.mount(tagName+'.route-'+tagName);
 					if(mountedTag.length === 0){
+							console.log('nf');
 							self.trigger('tagNotFound',tagName);
 							if(self.opts['on-tagnotfound'] && self.opts['on-tagnotfound'] instanceof Function){
 								self.opts['on-tagnotfound'](tagName);
@@ -50,6 +51,7 @@ riot.tag2('router', '<div class="route-container"><yield></yield></div><div clas
 
 					}
 					else{
+							console.log('f');
 							self.trigger('routeChanged',tagName);
 							if(self.opts['on-routechange'] && self.opts['on-routechange'] instanceof Function){
 								self.opts['on-routechange'](tagName);
@@ -74,20 +76,23 @@ riot.tag2('router', '<div class="route-container"><yield></yield></div><div clas
 							var tokenRegExp = /:([a-z]*)/ig;
 
 							var params = path.match(tokenRegExp);
-							params = params && params.map(param=> param.length>0 ? param.substring(1): '') || params;
+							params = params && params.map(param => param.length>0 ? param.substring(1): '') || params;
 
 							path = path.replace(tokenRegExp,'*');
 
 							riot.route(path,function() {
+									console.log('exec parsed',path);
 
 									routeParams={};
 
-									params.forEach((param,index) => {
+									params && params.forEach((param,index) => {
 										routeParams[param] = arguments[index];
 									});
 
 									changeRoute(component);
 							});
+
+							riot.route.start(true);
 					})(path, component)
 			}
 
@@ -97,8 +102,7 @@ riot.tag2('router', '<div class="route-container"><yield></yield></div><div clas
 						var routeContainer = this.root.querySelector('.route-container');
 						routeContainer.remove && routeContainer.remove();
 					}
-
 					$appRoot = this.root.querySelector('.riot-root');
-					riot.route.start(true);
+
 			});
 });

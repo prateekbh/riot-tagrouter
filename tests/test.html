@@ -2,34 +2,33 @@
 <html>
 
 <head>
-	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-	<title>Tests for riot-tagrouter</title>
+	<meta charset="utf-8">
+  <link rel="stylesheet" href="./css/mocha.css">
 </head>
 
 <body>
-	<app-route></app-route>
-	
+  <app-route></app-route>
+  <div id="mocha"></div>
 	<script src="./js/vendor/mocha.js"></script>
 	<script src="./js/vendor/chai.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/riot/2.6.1/riot+compiler.min.js"></script>
+  <script src="./js/vendor/riot.js"></script>
+  <script src="./tags/app-route.tag" type="riot/tag"></script>
 	<script src="../build/routerlib.js"></script>
-	<script src="./tags/app-route.tag" type="riot/tag"></script>
-	<!--<script src="js/vendor/simulant.js"></script>-->
 	<script>
 		mocha.setup('bdd');
 		// Setup chai
 		var assert = chai.assert,
 			should = chai.should,
 			expect = chai.expect;
+
 	</script>
-	<!--<script src="./tags/tags.js"></script>
-	<script src="js/tests.js"></script>-->
+
+	<script src="./js/tests.js"></script>
 	<script>
-	window.onload = function() {
-		riot.mount('app-route',{})
-		var runner;
-		if (window.mochaPhantomJS) {
-			mochaPhantomJS.run();
+		window.onload = function () {
+      riot.mount('app-route');
+      var runner;
+			mocha.run();
 			var failedTests = [];
 			runner.on('end', function() {
 				window.mochaResults = runner.stats;
@@ -54,7 +53,6 @@
 				});
 			}
 		}
-	};
 	</script>
 </body>
 
