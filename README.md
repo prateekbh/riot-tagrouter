@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/prateekbh/riot-tagrouter.svg?branch=master)](https://travis-ci.org/prateekbh/riot-tagrouter)
+
 # riot-tagrouter
 
 Riot js comes with a pretty rock solid [router](http://riotjs.com/api/route/) along with the library file. 
