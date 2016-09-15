@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/prateekbh/riot-tagrouter.svg?branch=master)](https://travis-ci.org/prateekbh/riot-tagrouter)
+[![Sauce Test Status](https://saucelabs.com/browser-matrix/prateekbh.svg)](https://saucelabs.com/u/prateekbh)
+
 
 # riot-tagrouter
 

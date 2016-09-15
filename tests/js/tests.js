@@ -9,8 +9,8 @@ function check(done, f) {
 
 describe('Router Test Suite => ', function() {
 	describe('Basic setup test: ', function() {
-		it('Router, Route and navigate are available', (done) => {
-			check(done, () => {
+		it('Router, Route and navigate are available', function(done) {
+			check(done, function () {
 				var _router = document.querySelector('app-route router');
 				var _route = document.querySelector('app-route router route');
 				var _navigate = document.querySelector('navigate');
@@ -19,8 +19,8 @@ describe('Router Test Suite => ', function() {
 				expect(_navigate._tag).to.be.an('Object');
 			});
 		});
-		it('Navigation is auto started and home is mounted',(done)=>{
-			check(done, () => {
+		it('Navigation is auto started and home is mounted', function(done) {
+			check(done, function() {
 				expect(document.querySelector('h1').innerText).to.be.equals('home');
 			});
 		});

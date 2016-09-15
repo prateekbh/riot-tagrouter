@@ -26,8 +26,8 @@
 	<script src="./js/tests.js"></script>
 	<script>
 		window.onload = function () {
-      riot.mount('app-route');
-      var runner;
+			riot.mount('app-route');
+			var runner;
 			mocha.run();
 			var failedTests = [];
 			runner.on('end', function() {

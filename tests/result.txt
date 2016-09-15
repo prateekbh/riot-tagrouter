@@ -1,1 +1,31 @@
+1..2
+not ok 1 Router Test Suite =>  Basic setup test:  Router, Route and navigate are available
+  TypeError: 'null' is not an object (evaluating '_router._tag')
+      at file:///Users/prateekbh/projects/riot-tagrouter/tests/js/tests.js:17
+      at check (file:///Users/prateekbh/projects/riot-tagrouter/tests/js/tests.js:3)
+      at file:///Users/prateekbh/projects/riot-tagrouter/tests/js/tests.js:20
+      at file:///Users/prateekbh/projects/riot-tagrouter/tests/js/vendor/mocha.js:4333
+      at file:///Users/prateekbh/projects/riot-tagrouter/tests/js/vendor/mocha.js:4752
+      at file:///Users/prateekbh/projects/riot-tagrouter/tests/js/vendor/mocha.js:4843
+      at next (file:///Users/prateekbh/projects/riot-tagrouter/tests/js/vendor/mocha.js:4677)
+      at file:///Users/prateekbh/projects/riot-tagrouter/tests/js/vendor/mocha.js:4687
+      at next (file:///Users/prateekbh/projects/riot-tagrouter/tests/js/vendor/mocha.js:4625)
+      at file:///Users/prateekbh/projects/riot-tagrouter/tests/js/vendor/mocha.js:4654
+      at timeslice (file:///Users/prateekbh/projects/riot-tagrouter/tests/js/vendor/mocha.js:5795)
+not ok 2 Router Test Suite =>  Basic setup test:  Navigation is auto started and home is mounted
+  TypeError: 'null' is not an object (evaluating 'document.querySelector('h1').innerText')
+      at file:///Users/prateekbh/projects/riot-tagrouter/tests/js/tests.js:24
+      at check (file:///Users/prateekbh/projects/riot-tagrouter/tests/js/tests.js:3)
+      at file:///Users/prateekbh/projects/riot-tagrouter/tests/js/tests.js:25
+      at file:///Users/prateekbh/projects/riot-tagrouter/tests/js/vendor/mocha.js:4333
+      at file:///Users/prateekbh/projects/riot-tagrouter/tests/js/vendor/mocha.js:4752
+      at file:///Users/prateekbh/projects/riot-tagrouter/tests/js/vendor/mocha.js:4843
+      at next (file:///Users/prateekbh/projects/riot-tagrouter/tests/js/vendor/mocha.js:4677)
+      at file:///Users/prateekbh/projects/riot-tagrouter/tests/js/vendor/mocha.js:4687
+      at next (file:///Users/prateekbh/projects/riot-tagrouter/tests/js/vendor/mocha.js:4625)
+      at file:///Users/prateekbh/projects/riot-tagrouter/tests/js/vendor/mocha.js:4654
+      at timeslice (file:///Users/prateekbh/projects/riot-tagrouter/tests/js/vendor/mocha.js:5795)
+# tests 2
+# pass 0
+# fail 2
 
