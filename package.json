@@ -19,12 +19,19 @@
   },
   "homepage": "https://github.com/prateekbh/riot-tagrouter#readme",
   "devDependencies": {
+    "expect.js": "^0.3.1",
     "grunt": "^1.0.1",
     "grunt-babel": "^6.0.0",
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-concat": "^1.0.1",
     "grunt-riot": "^0.1.6",
-    "mocha-phantomjs": "^4.1.0",
+    "karma": "^1.0.0",
+    "karma-mocha": "^1.0.1",
+    "karma-mocha-reporter": "^2.0.3",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "karma-riot": "^1.1.0",
+    "mocha": "^2.4.5",
+    "phantomjs-prebuilt": "^2.1.7",
     "riot": "^2.6.1"
   }
 }

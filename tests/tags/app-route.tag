@@ -1,10 +1,10 @@
 <home>
-    <h1> home </h1>
+    <h1>home</h1>
 	<navigate to='/user/profile/prateek'>Prateek</navigate>
 </home>
 
 <msg-component>
-    <h1> message component </h1>
+    <h1>message component</h1>
 </msg-component>
 
 <user-component>
@@ -25,11 +25,10 @@
 		</router>
 		<script>
 				this.prplFunc=function(){
-					return new Promise((resolve, reject)=>{
+					return new Promise(function(resolve, reject){
 						console.log('lazy fetch here');
 						resolve('msg-component');
 					});
 				}
 		</script>
 </app-route>
-

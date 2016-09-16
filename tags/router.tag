@@ -75,7 +75,6 @@
 							
 							//actual callback
 							riot.route(path,function() {
-									console.log('exec parsed',path);
 									//empty the route params
 									routeParams={};
 
