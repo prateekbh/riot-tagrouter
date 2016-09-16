@@ -1,6 +1,4 @@
 [![Build Status](https://travis-ci.org/prateekbh/riot-tagrouter.svg?branch=master)](https://travis-ci.org/prateekbh/riot-tagrouter)
-[![Sauce Test Status](https://saucelabs.com/browser-matrix/prateekbh.svg)](https://saucelabs.com/u/prateekbh)
-
 
 # riot-tagrouter
 
@@ -88,3 +86,6 @@ Tell ppl how can this be added in their project? (script tags, webpack, grunt et
 
 ###Note
 All '*:slugs*' are replaced by '\*' internally, you can however use all the rules that you can use in riot router, however url params will be passed as oopts only for '*:slug*' keys
+
+####P.S.
+Special <3 to [Browserstack](https://browserstack.com) for automated testing with real devices.

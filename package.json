@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "grunt build",
-    "test": "./node_modules/.bin/mocha-phantomjs -R tap tests/test.html > tests/result.txt;"
+    "test": "./node_modules/karma/bin/karma start tests/karma.conf.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
     "grunt-contrib-concat": "^1.0.1",
     "grunt-riot": "^0.1.6",
     "karma": "^1.0.0",
+    "karma-browserstack-launcher": "^1.1.1",
     "karma-mocha": "^1.0.1",
     "karma-mocha-reporter": "^2.0.3",
     "karma-phantomjs-launcher": "^1.0.0",
