@@ -12,9 +12,8 @@
 			var routeParams = {};
 
 			function unmountCurrRoute(){
-					if(currTag){
-							console.log(currTag);
-							debugger;
+					if(currTag && currTag.unmount){
+							 currTag.unmount();
 					}
 			}
 
@@ -100,7 +99,12 @@
 						routeContainer.remove && routeContainer.remove();
 					}
 					$appRoot = this.root.querySelector('.riot-root');
-					
+
+					this.opts.baseRoute && riot.route.base(this.opts.baseRoute);
+
+					this.root.getBasePath = function(){
+						return self.opts.baseRoute||'#';
+					}
 			});
     </script>
 </router>

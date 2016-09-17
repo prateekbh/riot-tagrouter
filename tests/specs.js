@@ -20,12 +20,71 @@ describe('Router structure tests', function() {
     expect(document.querySelector('navigate')._tag).to.be.an('object');  
     done();
   });
+  it('router should expose getBasePath',function(done){
+    expect(document.querySelector('router').getBasePath).to.be.a('function');  
+    done();
+  });
+  it('anchor link should have right link',function(done){
+    expect(document.querySelector('navigate > a').getAttribute('href')).to.be(document.querySelector('router').getBasePath()+document.querySelector('navigate').getAttribute('to'));  
+    done();
+  });
 });
 
 describe('Basic navigation tests', function() {
   it('home route works', function(done) {
     expect(document.querySelector('h1').innerText).to.be('home');
     done();
+  });
+  it('Navigate link works', function(done) {
+    var navBtn = document.querySelector('navigate>a');
+    navBtn.click();
+    expect(document.querySelector('h1').innerText).to.be('user component');
+    expect(window.location.hash).to.be('#user/profile/prateek');
+    done();
+  });
+  it('Back works', function(done){
+    this.timeout(200);
+    window.history.back();
+    setTimeout(function(){
+      expect(window.location.hash).to.be('');
+      done();
+    },100);
+    
+  });
+  it('unmounting is happening',function(done){
+    this.timeout(200);
+    var _isunmounted = false;
+    var currRoute = document.querySelector('home')._tag;
+    currRoute.one('unmount',function(){
+      _isunmounted = true;
+    });
+    var navBtn = document.querySelector('navigate>a');
+    navBtn.click();
+    setTimeout(function(){
+      expect(_isunmounted).to.be.equal(true);
+      done();
+    },100);
+  });
+});
+
+describe('Events are dispatched', function(){
+  var router = document.querySelector('router');
+  it('routeChange event is being fired on tag object',function(){
+    var _isDone = false;
+    this.timeout(100);
+    router._tag.one('routerChanged',function(){
+      _isDone = true;
+      expect(true).to.be.equal(true);
+      done();
+    });
+    window.history.back();
+    setTimeout(function(){
+      if(!_isDone){
+        expect(false).to.be.equal(true);
+      }
+      done();
+    },50);
+    
   });
 });
 

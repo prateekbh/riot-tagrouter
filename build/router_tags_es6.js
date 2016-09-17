@@ -1,4 +1,4 @@
-riot.tag2('navigate', '<a href="{opts.to}" onclick="{nagivateToRoute}"><yield></yield></a>', '', '', function(opts) {
+riot.tag2('navigate', '<a href="{document.querySelector(\'router\').getBasePath()+opts.to}" onclick="{nagivateToRoute}"><yield></yield></a>', '', '', function(opts) {
         var self = this;
         this.nagivateToRoute = function(e){
             e.preventDefault();
@@ -6,7 +6,7 @@ riot.tag2('navigate', '<a href="{opts.to}" onclick="{nagivateToRoute}"><yield></
         }
 });
 riot.tag2('route', '<yield></yield>', '', '', function(opts) {
-				this.on('mount',(e)=>{
+				this.on('mount',(e) => {
 						if(Object.keys(this.tags).length===0){
 							this.parent && this.parent.setRoute && this.parent.setRoute(this.opts.path, this.opts.component );
 						}
@@ -24,9 +24,8 @@ riot.tag2('router', '<div class="route-container"><yield></yield></div><div clas
 			var routeParams = {};
 
 			function unmountCurrRoute(){
-					if(currTag){
-							console.log(currTag);
-							debugger;
+					if(currTag && currTag.unmount){
+							 currTag.unmount();
 					}
 			}
 
@@ -101,6 +100,11 @@ riot.tag2('router', '<div class="route-container"><yield></yield></div><div clas
 					}
 					$appRoot = this.root.querySelector('.riot-root');
 
+					this.opts.baseRoute && riot.route.base(this.opts.baseRoute);
+
+					this.root.getBasePath = function(){
+						return self.opts.baseRoute||'#';
+					}
 			});
 });
 

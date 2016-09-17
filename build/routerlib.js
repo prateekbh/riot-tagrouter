@@ -1,6 +1,6 @@
 'use strict';
 
-riot.tag2('navigate', '<a href="{opts.to}" onclick="{nagivateToRoute}"><yield></yield></a>', '', '', function (opts) {
+riot.tag2('navigate', '<a href="{document.querySelector(\'router\').getBasePath()+opts.to}" onclick="{nagivateToRoute}"><yield></yield></a>', '', '', function (opts) {
 		var self = this;
 		this.nagivateToRoute = function (e) {
 				e.preventDefault();
@@ -30,9 +30,8 @@ riot.tag2('router', '<div class="route-container"><yield></yield></div><div clas
 		var routeParams = {};
 
 		function unmountCurrRoute() {
-				if (currTag) {
-						console.log(currTag);
-						debugger;
+				if (currTag && currTag.unmount) {
+						currTag.unmount();
 				}
 		}
 
@@ -108,6 +107,12 @@ riot.tag2('router', '<div class="route-container"><yield></yield></div><div clas
 						routeContainer.remove && routeContainer.remove();
 				}
 				$appRoot = _this2.root.querySelector('.riot-root');
+
+				_this2.opts.baseRoute && riot.route.base(_this2.opts.baseRoute);
+
+				_this2.root.getBasePath = function () {
+						return self.opts.baseRoute || '#';
+				};
 		});
 });
 //# sourceMappingURL=routerlib.js.map

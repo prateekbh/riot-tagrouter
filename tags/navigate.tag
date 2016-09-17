@@ -1,5 +1,5 @@
 <navigate>
-    <a href='{opts.to}' onclick={nagivateToRoute}>
+    <a href='{document.querySelector('router').getBasePath()+opts.to}' onclick={nagivateToRoute}>
         <yield></yield>
     </a>
     <script>
