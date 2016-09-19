@@ -8,3 +8,8 @@ branches:
 
 notifications:
     email: true
+
+addons:
+  sauce_connect:
+    username: "prateekbh"
+    access_key: "cb330837-aa83-49fa-8e2c-5742005b26df"
