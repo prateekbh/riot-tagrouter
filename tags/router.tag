@@ -19,30 +19,26 @@
 
 			function createRouteWithTagName(tagName){
 					//construct the tag
-					var tag = '<'+tagName+' class="route-'+tagName+'" ';
-					for(var param in routeParams){
-						tag = tag + param + '="' + routeParams[param] + '" ';
-					}
-					tag = tag + '></'+tagName+'>';
+					var tag = '<'+tagName+' class="route-'+tagName+'"></'+tagName+'>';
 
 					//remove current tag
 					unmountCurrRoute();
 
 					//mount new tag
 					$appRoot.innerHTML = tag;
-					var mountedTag = riot.mount(tagName+'.route-'+tagName);
+					var mountedTag = riot.mount(tagName+'.route-'+tagName,routeParams);
 					if(mountedTag.length === 0){
 							self.trigger('tagNotFound',tagName);
-							if(self.opts['on-tagnotfound'] && self.opts['on-tagnotfound'] instanceof Function){
-								self.opts['on-tagnotfound'](tagName);
+							if(self.opts['onTagnotfound'] && self.opts['onTagnotfound'] instanceof Function){
+								self.opts['onTagnotfound'](tagName);
 							}
 							//right now throwing this error halts the entire router
 							//throw (new Error('Riot Element Not Found')); 
 					}
 					else{
 							self.trigger('routeChanged',tagName);
-							if(self.opts['on-routechange'] && self.opts['on-routechange'] instanceof Function){
-								self.opts['on-routechange'](tagName);
+							if(self.opts['onRoutechange'] && self.opts['onRoutechange'] instanceof Function){
+								self.opts['onRoutechange'](tagName);
 							}
 							currTag = mountedTag[0];
 					}
@@ -108,4 +104,3 @@
 			});
     </script>
 </router>
-

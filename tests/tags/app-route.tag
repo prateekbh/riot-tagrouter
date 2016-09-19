@@ -8,11 +8,11 @@
 </msg-component>
 
 <user-component>
-    <h1>user component</h1>
+	<h1>user component for {this.opts.user}</h1>
 </user-component>
 
 <app-route>
-		<router show-routes={true}>
+		<router show-routes={true} on-routechange={fireRouteChange} on-tagnotfound={fireTagnotfound}>
 				<route path='/' component='home'></route>
 				<route path='user'>
 						<route path='/profile/:user' component='user-component'></route>
@@ -24,11 +24,20 @@
 				<dummy></dummy>
 		</router>
 		<script>
-				this.prplFunc=function(){
-					return new Promise(function(resolve, reject){
-						console.log('lazy fetch here');
-						resolve('msg-component');
-					});
-				}
+			var self=this;
+			this.prplFunc = function(){
+				return new Promise(function(resolve, reject){
+					//do webpack.require here
+					resolve('msg-component');
+				});
+			}
+
+			this.fireRouteChange = function(){
+				self.trigger('routeChanged');
+			}
+
+			this.fireTagnotfound = function(){
+				self.trigger('tagNotFound');
+			}
 		</script>
 </app-route>

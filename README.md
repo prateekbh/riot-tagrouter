@@ -2,6 +2,10 @@
 
 # riot-tagrouter
 
+```shell
+    npm install --save riot-tagrouter
+```
+
 Riot js comes with a pretty rock solid [router](http://riotjs.com/api/route/) along with the library file. 
 This router however is purely imperitive and maintaining it in a large codebase can go out of hand pretty easily.
 
@@ -82,10 +86,9 @@ then that will be called too.
 then that will be called too.
 
 ##Usage
-Tell ppl how can this be added in their project? (script tags, webpack, grunt etc)
+After NPM installation, inside the *node_modules > riot-tagrouter > build* will be the routerlib.js(ES5 verison) or router_tags_es6.js(ES6 version), feel free to use the build toold of your choice(Webpack,Grunt, gulp).
+
+Also a raw(Un Rioted and ES6) version of all the tags lie in *tags* folder if you want a specific loader to precess it for your Webpack.  
 
 ###Note
 All '*:slugs*' are replaced by '\*' internally, you can however use all the rules that you can use in riot router, however url params will be passed as oopts only for '*:slug*' keys
-
-####P.S.
-Special <3 to [Browserstack](https://browserstack.com) for automated testing with real devices.

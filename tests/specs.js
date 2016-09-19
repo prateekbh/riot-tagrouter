@@ -38,7 +38,7 @@ describe('Basic navigation tests', function() {
   it('Navigate link works', function(done) {
     var navBtn = document.querySelector('navigate>a');
     navBtn.click();
-    expect(document.querySelector('h1').innerText).to.be('user component');
+    expect(document.querySelector('h1').innerText).to.be('user component for prateek');
     expect(window.location.hash).to.be('#user/profile/prateek');
     done();
   });
@@ -69,22 +69,47 @@ describe('Basic navigation tests', function() {
 
 describe('Events are dispatched', function(){
   var router = document.querySelector('router');
-  it('routeChange event is being fired on tag object',function(){
-    var _isDone = false;
+  var appRouter = document.querySelector('app-route');
+  it('routeChange event is being fired on tag object',function(done){
+    var _isTriggeredOnTag = false;
+    var _isTriggeredOnOpts = false;
     this.timeout(100);
-    router._tag.one('routerChanged',function(){
-      _isDone = true;
-      expect(true).to.be.equal(true);
-      done();
+    router._tag.one('routeChanged',function(){
+      _isTriggeredOnTag = true;
+    });
+    appRouter._tag.one('routeChanged',function(){
+      _isTriggeredOnOpts = true;
     });
     window.history.back();
     setTimeout(function(){
-      if(!_isDone){
+      if(!_isTriggeredOnTag || !_isTriggeredOnOpts){
         expect(false).to.be.equal(true);
-      }
+      } else if(_isTriggeredOnTag && _isTriggeredOnOpts){
+        expect(true).to.be.equal(true);
+      } 
       done();
     },50);
-    
+  });
+  
+  it('not found event is being fired on tag object',function(done){
+    var _isTriggeredOnTag = false;
+    var _isTriggeredOnOpts = false;
+    this.timeout(100);
+    router._tag.one('tagNotFound',function(){
+      _isTriggeredOnTag = true;
+    });
+    appRouter._tag.one('tagNotFound',function(){
+      _isTriggeredOnOpts = true;
+    });
+    riot.route('/messages/outbox');
+    setTimeout(function(){
+      if(!_isTriggeredOnTag || !_isTriggeredOnOpts){
+        expect(false).to.be.equal(true);
+      } else if(_isTriggeredOnTag && _isTriggeredOnOpts){
+        expect(true).to.be.equal(true);
+      } 
+      done();
+    },50);
   });
 });
 

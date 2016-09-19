@@ -1,63 +1,30 @@
 var projectName = require('../package').name;
 
-const customLaunchers = {
-  BS_Chrome: {
-    base: 'BrowserStack',
-    os: 'Windows',
-    os_version: '10',
-    browser: 'chrome',
-    browser_version: '47.0'
-  },
-  BS_Firefox: {
-    base: 'BrowserStack',
-    os: 'Windows',
-    os_version: '10',
-    browser: 'firefox',
-    browser_version: '47.0'
-  },
-  BS_Safari: {
-    base: 'BrowserStack',
-    os: 'OS X',
-    os_version: 'El Capitan',
-    browser: 'safari',
-    browser_version: '9.0'
-  },
-  BS_MobileSafari8: {
-    base: 'BrowserStack',
-    os: 'ios',
-    os_version: '8.3',
-    browser: 'iphone',
-    real_mobile: false
-  },
-  BS_MobileSafari9: {
-    base: 'BrowserStack',
-    os: 'ios',
-    os_version: '9.1',
-    browser: 'iphone',
-    real_mobile: false
-  },
-  BS_InternetExplorer9: {
-    base: 'BrowserStack',
-    os: 'Windows',
-    os_version: '7',
-    browser: 'ie',
-    browser_version: '9.0'
-  },
-  BS_InternetExplorer10: {
-    base: 'BrowserStack',
-    os: 'Windows',
-    os_version: '8',
-    browser: 'ie',
-    browser_version: '10.0'
-  },
-  BS_InternetExplorer11: {
-    base: 'BrowserStack',
-    os: 'Windows',
-    os_version: '10',
-    browser: 'ie',
-    browser_version: '11.0'
+var customLaunchers = {
+    sl_chrome: {
+      base: 'SauceLabs',
+      browserName: 'chrome',
+      platform: 'Windows 7',
+      version: '35'
+    },
+    sl_firefox: {
+      base: 'SauceLabs',
+      browserName: 'firefox',
+      version: '47'
+    },
+    sl_ios_safari: {
+      base: 'SauceLabs',
+      browserName: 'iphone',
+      platform: 'OS X 10.9',
+      version: '7.1'
+    },
+    sl_ie_11: {
+      base: 'SauceLabs',
+      browserName: 'internet explorer',
+      platform: 'Windows 8.1',
+      version: '10'
+    }
   }
-};
 
 module.exports = function(config) {
   config.set({
@@ -81,16 +48,13 @@ module.exports = function(config) {
   });
 
   if (process.env.TRAVIS) {
-    config.browserStack = {
-      project: projectName,
-      build: process.env.TRAVIS_BUILD_NUMBER,
-      name: process.env.TRAVIS_JOB_NUMBER,
-      username: process.env.BROWSERSTACK_USERNAME,
-      accessKey: process.env.BROWSERSTACK_ACCESS_KEY
-    }
-    config.plugins.push('karma-browserstack-launcher');
+    config.sauceLabs = {
+        testName: projectName
+    };
     config.customLaunchers = customLaunchers;
     config.browsers = Object.keys(customLaunchers);
+    config.plugins.push('karma-sauce-launcher');
+    config.reporters.push('saucelabs');
     config.singleRun = true;
     config.concurrency = 2;
   }else{
