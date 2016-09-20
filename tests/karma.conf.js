@@ -26,6 +26,7 @@ module.exports = function(config) {
     ],
     files: [
       '../node_modules/expect.js/index.js',
+      './js/promises.js',
       '../build/routerlib.js',
       '**/*.tag',
       'specs.js'

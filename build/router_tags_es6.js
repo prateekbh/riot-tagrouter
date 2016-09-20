@@ -36,8 +36,17 @@ riot.tag2('router', '<div class="route-container"><yield></yield></div><div clas
 					unmountCurrRoute();
 
 					$appRoot.innerHTML = tag;
-					var mountedTag = riot.mount(tagName+'.route-'+tagName,routeParams);
-					if(mountedTag.length === 0){
+					var mountedTag;
+					try{
+						mountedTag = riot.mount(tagName+'.route-'+tagName,routeParams);
+					}
+					catch(e){
+
+						setTimeout(function(){
+							throw(e);
+						},0);
+					}
+					if(!mountedTag || mountedTag.length === 0){
 							self.trigger('tagNotFound',tagName);
 							if(self.opts['onTagnotfound'] && self.opts['onTagnotfound'] instanceof Function){
 								self.opts['onTagnotfound'](tagName);
@@ -103,5 +112,4 @@ riot.tag2('router', '<div class="route-container"><yield></yield></div><div clas
 					}
 			});
 });
-
 

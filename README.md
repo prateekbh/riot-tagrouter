@@ -25,7 +25,9 @@ The API is kept pretty clean and minimal, a minimal router config would be decla
         <route path='/user/:user' component='user-profile'></route>
         <route path='/messages'>
             <route path='/:from-:to' component='msg-component'></route>
+            <router path='/..' component={msg-404}/>
         </route>
+        <router path='/..' component={tag-404}/>
     </router>
 ```
 

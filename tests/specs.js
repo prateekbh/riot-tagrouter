@@ -51,15 +51,22 @@ describe('Basic navigation tests', function() {
     },100);
     
   });
+  it('Promise based navigation works',function(done){
+    this.timeout(200);
+    riot.route('/messages/john-jane');
+    setTimeout(function(){
+      expect(document.querySelector('h1').innerText).to.be('message from john to jane');
+      done();
+    },100);
+  });
   it('unmounting is happening',function(done){
     this.timeout(200);
     var _isunmounted = false;
-    var currRoute = document.querySelector('home')._tag;
+    var currRoute = document.querySelector('msg-component')._tag;
     currRoute.one('unmount',function(){
       _isunmounted = true;
     });
-    var navBtn = document.querySelector('navigate>a');
-    navBtn.click();
+    riot.route('/');
     setTimeout(function(){
       expect(_isunmounted).to.be.equal(true);
       done();
@@ -70,7 +77,7 @@ describe('Basic navigation tests', function() {
 describe('Events are dispatched', function(){
   var router = document.querySelector('router');
   var appRouter = document.querySelector('app-route');
-  it('routeChange event is being fired on tag object',function(done){
+  it('routeChange event is being fired on tag object and opts as a function',function(done){
     var _isTriggeredOnTag = false;
     var _isTriggeredOnOpts = false;
     this.timeout(100);
@@ -91,7 +98,7 @@ describe('Events are dispatched', function(){
     },50);
   });
   
-  it('not found event is being fired on tag object',function(done){
+  it('not found event is being fired on tag object and opts as a function',function(done){
     var _isTriggeredOnTag = false;
     var _isTriggeredOnOpts = false;
     this.timeout(100);
@@ -113,17 +120,47 @@ describe('Events are dispatched', function(){
   });
 });
 
-/**		
-* Test cases:		
-* Router exist		
-* Route exist		
-* Navigate exist		
-* Home navigation works		
-* Promise based navigation works		
-* RouteChanged event is fired		
-* Not found event is fired		
-* unmounting of tags are happening		
-* Error in mount of tag does not kill Router		
-* showRoutes works		
-* baseUrl works
-*/
+describe('check for edge cases',function(){
+  it('check for 404s',function(done){
+    riot.route('/messages/abc');
+    expect(document.querySelector('h1').innerText).to.be.equal('Msg not found :(');
+    riot.route('/user/abc');
+    expect(document.querySelector('h1').innerText).to.be.equal('Page not found :(');
+    done();
+  });
+  it('check if an error while mounting the tag does not kill the router',function(done){
+    window.onerror=undefined;
+    riot.route('/error');
+    expect(document.querySelector('h1').innerText).to.be.equal('check console for error');
+    riot.route('/');
+    expect(document.querySelector('h1').innerText).to.be.equal('home');
+    done();
+  });
+});
+
+describe('HTML5 instance of router test', function(){
+  it('show routes works',function(done){
+    this.timeout(1000);
+    riot.route('/');
+    var currRouteElems = document.querySelector('route');
+    expect(currRouteElems).to.not.be(null);
+    document.querySelector('router')._tag.unmount();
+    document.querySelector('app-route').innerHTML='<router base-route="/"><route path="/" component="home" ></route></router>';
+    riot.mount('router',{});
+    setTimeout(function(){
+      expect(document.querySelector('.riot-root')).to.not.be(null);
+      expect(document.querySelector('route')).to.be(null);
+      done();
+    },200);
+  });
+
+  it('base URL works',function(done){
+    this.timeout(1000);
+    riot.route('/');
+    setTimeout(function(){
+      riot.route('/user/profile/prateek');
+      expect(window.location.pathname).to.be.equal("/user/profile/prateek");
+      done();
+    },100);
+  });
+});

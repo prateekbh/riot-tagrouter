@@ -26,8 +26,17 @@
 
 					//mount new tag
 					$appRoot.innerHTML = tag;
-					var mountedTag = riot.mount(tagName+'.route-'+tagName,routeParams);
-					if(mountedTag.length === 0){
+					var mountedTag;
+					try{
+						mountedTag = riot.mount(tagName+'.route-'+tagName,routeParams);
+					}
+					catch(e){
+						//this doesn't let the router die and also does not modify any errors from tags
+						setTimeout(function(){
+							throw(e);
+						},0);
+					}
+					if(!mountedTag || mountedTag.length === 0){
 							self.trigger('tagNotFound',tagName);
 							if(self.opts['onTagnotfound'] && self.opts['onTagnotfound'] instanceof Function){
 								self.opts['onTagnotfound'](tagName);
