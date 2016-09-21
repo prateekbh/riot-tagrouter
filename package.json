@@ -11,7 +11,12 @@
     "type": "git",
     "url": "git+https://github.com/prateekbh/riot-tagrouter.git"
   },
-  "keywords": ["riotjs","riotrouter","router","prpl"],
+  "keywords": [
+    "riotjs",
+    "riotrouter",
+    "router",
+    "prpl"
+  ],
   "author": "Prateek Bhatnagar",
   "license": "MIT",
   "bugs": {
@@ -27,9 +32,9 @@
     "grunt-contrib-concat": "^1.0.1",
     "grunt-riot": "^0.1.6",
     "karma": "^1.0.0",
+    "karma-chrome-launcher": "^2.0.0",
     "karma-mocha": "^1.0.1",
     "karma-mocha-reporter": "^2.0.3",
-    "karma-phantomjs-launcher": "^1.0.0",
     "karma-riot": "^1.1.0",
     "karma-sauce-launcher": "^1.0.0",
     "mocha": "^2.4.5",

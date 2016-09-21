@@ -34,11 +34,11 @@ module.exports = function(config) {
     preprocessors: {
       '**/*.tag': ['riot']
     },
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
     reporters: ['mocha'],
   });
 
-  if (process.env.TRAVIS) {
+  if (process.env.TRAVIS && false) {
     config.sauceLabs = {
         testName: projectName
     };
@@ -49,6 +49,7 @@ module.exports = function(config) {
     config.singleRun = true;
     config.concurrency = 2;
   }else{
-    config.plugins.push('karma-phantomjs-launcher');
+    config.singleRun = true;
+    config.plugins.push('karma-chrome-launcher');
   }
 }
