@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/prateekbh/riot-tagrouter.svg?branch=master)](https://travis-ci.org/prateekbh/riot-tagrouter)
+[![Build Status](https://circleci.com/gh/prateekbh/riot-tagrouter.svg?style=shield)](https://github.com/prateekbh/riot-tagrouter)
 
 # riot-tagrouter
 
