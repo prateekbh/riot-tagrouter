@@ -90,15 +90,16 @@ then that will be called too.
 ##Isomorphism
 Now obviosly, time to first meaningful paint is the new perf metrics we cannot miss the importance of, hence server rendered streamed HTML is something of utmost importance for riot-tagrouter.
 
-That brings in the need of Isomorphism from the router's side. We aim at making this a super easy process for the users, now though riot's server side rendering(*riot.render*) doen not yield the exact component you write. 
-It strips of any event handlers, removes script tags in this process.
-
-Hence, we provide an extra api to which you can either pass your app router tag, or the router tag that contains the *route* tags, and it will just render out the component markup for you. which you can append after you last route and expect the things to work out for you pretty smoothly. 
+That brings in the need of Isomorphism from the router's side. We aim at making this a super easy process for the users.
+For server side rendering allow *riot.render* to inject the your router component into your markup. 
 
 ``` javascript
-    var renderToString = require('../node_modules/riot-tagrouter/build/serverRederer.js');
-    var html = renderToString(pathToAppRouteTag,nameOfTag,location url);
-    console.log(html);
+    var riot = require('riot');
+    var appRoutingTag = require('path to tag which has router implementations');
+    //console.log or res.render or how ever u wanna do it
+    res.render('index',{
+        routerMarkup: riot.render('app-router');//app-router be the name of the tag in which you encapsulate the router tag
+    });
 ```
 
 > a demo link to be placed here soon.
