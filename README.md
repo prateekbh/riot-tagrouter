@@ -93,4 +93,4 @@ After NPM installation, inside the *node_modules > riot-tagrouter > build* will 
 Also a raw(Un Rioted and ES6) version of all the tags lie in *tags* folder if you want a specific loader to precess it for your Webpack.  
 
 ###Note
-All '*:slugs*' are replaced by '\*' internally, you can however use all the rules that you can use in riot router, however url params will be passed as oopts only for '*:slug*' keys
+All '*:slugs*' are replaced by '\*' internally, you can however use all the rules that you can use in riot router, however url params will be passed as opts only for '*:slug*' keys
