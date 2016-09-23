@@ -62,7 +62,7 @@
 				function changeRoute(newRoute){
 						if(typeof(newRoute) === 'string'){
 								createRouteWithTagName(newRoute);
-						} else if ((window.Promise) && (newRoute instanceof window.Promise)){
+						} else if (newRoute instanceof Promise){
 								newRoute.then(tagName  => {
 									createRouteWithTagName(tagName);
 								});
@@ -86,12 +86,23 @@
 								/* CODE FOR ISOMORPHISM */
 								if(typeof window === 'undefined' && !_isRouteRendedered){
 									var serverSidePath = new RegExp(path.replace(/\*/g,'([^/?#]+?)').replace(/\.\./g,'.*')+'$');
-									if(serverSidePath.test(self.parent.opts.location)){
+									var loc = self.opts.location || self.parent&&self.parent.opts.location;
+
+									if(serverSidePath.test(loc)){
+										var matches=loc.match(serverSidePath)
+										matches.length&&matches.shift();
+
+										//build params from location opts
+										routeParams = {};
+										params && params.forEach(function (param, index) {
+												routeParams[param] = matches[index];
+										});
+
 										_isRouteRendedered = true;
-										createRouteWithTagName(component);
+										changeRoute(component);
 									}
 
-								} else {
+								} else if(typeof window !== 'undefined') {
 									//actual callback
 									riot.route(path,function() {
 											//empty the route params

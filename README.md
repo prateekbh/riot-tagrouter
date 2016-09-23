@@ -102,7 +102,9 @@ For server side rendering allow *riot.render* to inject the your router componen
     });
 ```
 
-> a demo link to be placed here soon.
+> For serverside rendering we highly recommend to use the following npm module
+> [https://github.com/ilearnio/riot-ssr](https://github.com/ilearnio/riot-ssr)
+> DEMO: Coming soon
 
 ##Usage
 After NPM installation, inside the *node_modules > riot-tagrouter > build* will be the routerlib.js(ES5 verison) or router_tags_es6.js(ES6 version), feel free to use the build toold of your choice(Webpack,Grunt, gulp).
@@ -112,3 +114,4 @@ Also a raw(Un Rioted and ES6) version of all the tags lie in *tags* folder if yo
 ###Note
  1. All '*:slugs*' are replaced by '\*' internally, you can however use all the rules that you can use in riot router, however url params will be passed as oopts only for '*:slug*' keys.
  2. It is highly recommended to keep your router instance inside another riot tag when you are planning a lazy loading component, it will help you pass component as a function.
+

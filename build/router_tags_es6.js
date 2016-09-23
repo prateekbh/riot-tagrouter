@@ -71,7 +71,7 @@ riot.tag2('router', '<div id="riotcontainer" class="route-container"><yield></yi
 				function changeRoute(newRoute){
 						if(typeof(newRoute) === 'string'){
 								createRouteWithTagName(newRoute);
-						} else if ((window.Promise) && (newRoute instanceof window.Promise)){
+						} else if (newRoute instanceof Promise){
 								newRoute.then(tagName  => {
 									createRouteWithTagName(tagName);
 								});
@@ -90,12 +90,22 @@ riot.tag2('router', '<div id="riotcontainer" class="route-container"><yield></yi
 
 								if(typeof window === 'undefined' && !_isRouteRendedered){
 									var serverSidePath = new RegExp(path.replace(/\*/g,'([^/?#]+?)').replace(/\.\./g,'.*')+'$');
-									if(serverSidePath.test(self.parent.opts.location)){
+									var loc = self.opts.location || self.parent&&self.parent.opts.location;
+
+									if(serverSidePath.test(loc)){
+										var matches=loc.match(serverSidePath)
+										matches.length&&matches.shift();
+
+										routeParams = {};
+										params && params.forEach(function (param, index) {
+												routeParams[param] = matches[index];
+										});
+
 										_isRouteRendedered = true;
-										createRouteWithTagName(component);
+										changeRoute(component);
 									}
 
-								} else {
+								} else if(typeof window !== 'undefined') {
 
 									riot.route(path,function() {
 
