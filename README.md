@@ -2,6 +2,8 @@
 
 # riot-tagrouter
 
+[![Join the chat at https://gitter.im/prateekbh/riot-tagrouter](https://badges.gitter.im/prateekbh/riot-tagrouter.svg)](https://gitter.im/prateekbh/riot-tagrouter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ```shell
     npm install --save riot-tagrouter
 ```
