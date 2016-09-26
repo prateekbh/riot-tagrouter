@@ -2,6 +2,8 @@
 
 # riot-tagrouter
 
+[![Join the chat at https://gitter.im/prateekbh/riot-tagrouter](https://badges.gitter.im/prateekbh/riot-tagrouter.svg)](https://gitter.im/prateekbh/riot-tagrouter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ```shell
     npm install --save riot-tagrouter
 ```
@@ -112,6 +114,5 @@ After NPM installation, inside the *node_modules > riot-tagrouter > build* will 
 Also a raw(Un Rioted and ES6) version of all the tags lie in *tags* folder if you want a specific loader to precess it for your Webpack.  
 
 ###Note
- 1. All '*:slugs*' are replaced by '\*' internally, you can however use all the rules that you can use in riot router, however url params will be passed as oopts only for '*:slug*' keys.
+ 1. All '*:slugs*' are replaced by '\*' internally, you can however use all the rules that you can use in riot router, however url params will be passed as opts only for '*:slug*' keys.
  2. It is highly recommended to keep your router instance inside another riot tag when you are planning a lazy loading component, it will help you pass component as a function.
-
