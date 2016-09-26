@@ -89,10 +89,30 @@ then that will be called too.
 2. *Tag not found*: Whenever a while mounting a tag is not found a 'tagNotFound' event will be triggered on the tag implementation and also if a function is passed to 'on-tagnotfound' attribute
 then that will be called too.
 
+##Isomorphism
+Now obviosly, time to first meaningful paint is the new perf metrics we cannot miss the importance of, hence server rendered streamed HTML is something of utmost importance for riot-tagrouter.
+
+That brings in the need of Isomorphism from the router's side. We aim at making this a super easy process for the users.
+For server side rendering allow *riot.render* to inject the your router component into your markup. 
+
+``` javascript
+    var riot = require('riot');
+    var appRoutingTag = require('path to tag which has router implementations');
+    //console.log or res.render or how ever u wanna do it
+    res.render('index',{
+        routerMarkup: riot.render('app-router');//app-router be the name of the tag in which you encapsulate the router tag
+    });
+```
+
+> For serverside rendering we highly recommend to use the following npm module
+> [https://github.com/ilearnio/riot-ssr](https://github.com/ilearnio/riot-ssr)
+> DEMO: Coming soon
+
 ##Usage
 After NPM installation, inside the *node_modules > riot-tagrouter > build* will be the routerlib.js(ES5 verison) or router_tags_es6.js(ES6 version), feel free to use the build toold of your choice(Webpack,Grunt, gulp).
 
 Also a raw(Un Rioted and ES6) version of all the tags lie in *tags* folder if you want a specific loader to precess it for your Webpack.  
 
 ###Note
-All '*:slugs*' are replaced by '\*' internally, you can however use all the rules that you can use in riot router, however url params will be passed as opts only for '*:slug*' keys
+ 1. All '*:slugs*' are replaced by '\*' internally, you can however use all the rules that you can use in riot router, however url params will be passed as opts only for '*:slug*' keys.
+ 2. It is highly recommended to keep your router instance inside another riot tag when you are planning a lazy loading component, it will help you pass component as a function.

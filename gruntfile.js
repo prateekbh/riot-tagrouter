@@ -7,7 +7,6 @@ module.exports = function(grunt) {
 						pre_build: ['./build/router_tags_es6.js','./build/routerlib.js']
 				},
 
-
 				riot: {
 					options: {
 							concat : true
@@ -25,9 +24,23 @@ module.exports = function(grunt) {
 									'build/routerlib.js' : 'build/router_tags_es6.js'
 							}
 					}
+			},
+
+			concat: {
+				concat_forisomorphism:{
+							options: {
+								stripBanners: true,
+								banner: 'var Promise = require("promise-polyfill"); var riot = require("riot");',
+							},
+							src: ['build/routerlib.js','tests/tags/app-route.js'],
+							dest: 'tests/isomorphism.js',
+				}
 			}
 
 		});
+
+		// Load the plugin that provides the "concat" task.
+		grunt.loadNpmTasks('grunt-contrib-concat');
 
 		// Load the plugin that provides the "clean" task.
 		grunt.loadNpmTasks('grunt-contrib-clean');
@@ -40,4 +53,6 @@ module.exports = function(grunt) {
 
 		//Task for building the static contents of the application
 		grunt.registerTask("default", ["clean", "riot", "babel"]);
+
+		grunt.registerTask("test-iso", ["concat"]);
 };
