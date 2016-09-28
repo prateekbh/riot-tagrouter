@@ -2,16 +2,18 @@ webpackJsonp([1],[
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	/* WEBPACK VAR INJECTION */(function(riot) {'use strict';
 
-	var riot = __webpack_require__(1);
 	var routerTag = __webpack_require__(3);
+	var routerTag = __webpack_require__(9);
+	var riotmui = __webpack_require__(8);
 
 	if (riot.render && module.exports) {
-		module.exports = riot.render('app-router');
+		module.exports = riot.render('rtr-router', { location: '/' });
 	} else {
-		riot.mount('*', {});
+		riot.mount('*');
 	}
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
 /* 1 */,
@@ -21,11 +23,13 @@ webpackJsonp([1],[
 
 	var riot = __webpack_require__(1);
 
-	riot.tag2('app-router', '<router> </router>', '', '', function(opts) {
-			var routerTag = __webpack_require__(4);
-			var routeTag = __webpack_require__(5);
-			var navigateTag = __webpack_require__(6);
+	var routerTag = __webpack_require__(4);
+	var routeTag = __webpack_require__(5);
+	var navigateTag = __webpack_require__(6);
+	var homeTag = __webpack_require__(7);
+	var apiTag = __webpack_require__(10);
 
+	riot.tag2('rtr-router', '<router> <route path="/" component="rtr-home"></route> <route path="/apis" component="rtr-apis"></route> <route path="/isomorphism" component="rtr-isomorphism"></route> <route path="/prpl" component="rtr-prpl"></route> </router>', '', '', function(opts) {
 	});
 
 /***/ },
@@ -188,6 +192,39 @@ webpackJsonp([1],[
 	            e.preventDefault();
 	            riot.route(self.opts.to,self.opts.title||null,self.opts.replace?true:false);
 	        }
+	});
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var riot = __webpack_require__(1);
+
+	riot.tag2('rtr-home', '<h2>motivation</h2> <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>', '', '', function(opts) {
+	});
+
+/***/ },
+/* 8 */,
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var riot = __webpack_require__(1);
+
+	riot.tag2('rtr-header', '<nav> <material-tabs tabchanged="{changeRoute}" tabs="[\\{title:\'Home\'\\},\\{title:\'APIs\'\\},\\{title:\'Isomorphism\'\\},\\{title:\'PRPL\'\\}]"></material-tabs> </nav> <div id="logo">&lt;Router /&gt;</div> <h1>A declarative router for <a href="http://riotjs.com">RiotjS</a></h1>', '', '', function(opts) {
+			this.changeRoute=function(e){
+				var route = e.title.toLowerCase();
+				route === "home" ? route ='' : route = route;
+				riot.route(route);
+			}
+	});
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var riot = __webpack_require__(1);
+
+	riot.tag2('rtr-apis', '<h2>APIs</h2>', '', '', function(opts) {
 	});
 
 /***/ }
