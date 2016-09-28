@@ -1,4 +1,3 @@
-
 <rtr-home>
-	<h1>motivation</h1>
+	<h2>motivation</h2>
 </rtr-home>
