@@ -1,7 +1,7 @@
 <route>
 		<yield></yield>
 		<script>
-				this.on('mount',(e) => {
+				this.on('mount',function (e) {
 						if(Object.keys(this.tags).length===0){
 							this.parent && this.parent.setRoute && this.parent.setRoute(this.opts.path, this.opts.component );
 						}

@@ -21,6 +21,13 @@ a{
 	text-decoration: none;
 }
 
+blockquote{
+	background-color: #eee;
+	border-left: 2px solid #aaa;
+	margin: 8px 16px;
+	padding: 8px;
+	width: 90%;
+}
 
 #logo{
 	display: inline-block;

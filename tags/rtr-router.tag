@@ -3,6 +3,8 @@ var routeTag = require("./core/route.tag");
 var navigateTag = require("./core/navigate.tag");
 var homeTag = require("./rtr-home.tag");
 var apiTag = require("./rtr-apis.tag");
+var isomorphismTag = require("./rtr-isomorphism.tag");
+var prplTag = require("./rtr-prpl.tag");
 
 <rtr-router>
 	<router>
