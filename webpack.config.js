@@ -6,6 +6,7 @@ module.exports = {
 							vendor: "./scripts/vendor.js",
 							home: "./scripts/home.js",
 							apis: "./scripts/api.js",
+							prpl: "./scripts/prpl.js",
 							app: "./scripts/app.js"
 			},
 		module:{
