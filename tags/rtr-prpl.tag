@@ -6,19 +6,7 @@
 		<div>To keep lazy loading really realy simple we introduced a method of loading your tags on fly, you only have to pass a function to the component which returns a PROMISE object, fetches your tags and resolves the promise with the desired tag name.</div>
 
 		<blockquote>
-			<pre>
-				&lt;rtr-router&gt;
-					&lt;router&gt;
-						&lt;route path ='/' component="rtr-home"/&gt;
-						&lt;route path ='/apis' component={this.parent.loadApiPage}/&gt;
-						&lt;route path ='/isomorphism' component="rtr-isomorphism"/&gt;
-						&lt;route path ='/prpl' component={this.parent.loadPrplPage}/&gt;
-					&lt;/router&gt;
-					&lt;script&gt;
-						
-					&lt;/script&gt;
-				&lt;/rtr-router&gt;
-			</pre>
+				Follow this <a href='https://gist.github.com/prateekbh/1dd14ade044b24baadbbb8917e5e07e1'>gist</a>
 		</blockquote>
 
 		<div>&nbsp;</div>
