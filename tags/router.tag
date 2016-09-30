@@ -62,10 +62,15 @@
 				function changeRoute(newRoute){
 						if(typeof(newRoute) === 'string'){
 								createRouteWithTagName(newRoute);
-						} else if (newRoute instanceof Promise){
-								newRoute.then(tagName  => {
-									createRouteWithTagName(tagName);
-								});
+						} else if (newRoute instanceof Function){
+								var result = newRoute();
+								if(typeof(result) === 'string'){
+									createRouteWithTagName(newRoute);
+								} else if(result instanceof Promise){
+									result.then(tagName  => {
+										createRouteWithTagName(tagName);
+									});
+								} 
 						}
 				}
 

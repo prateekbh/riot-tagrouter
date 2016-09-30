@@ -37,14 +37,14 @@ The API is kept pretty clean and minimal, a minimal router config would be decla
 This router as promised also has first class support for lazy loaded routes again in a declarative way. The component attribute of the router takes one of the two parameter
 
  1. A string type name of the component to be mounted
- 2. A Promise which at the end needs to be resolved with a string type name of the component
+ 2. A function which either returns a string or a promise which at the end needs to be resolved with a string type name of the component
 
 ``` html
 	<router base-route='/'>
         <route path='/' component='home'></route>
         <route path='/user/*' component='user-profile'></route>
         <route path='/messages'>
-            <route path='/:from-:to' component={getMessegesComponent()}></route>
+            <route path='/:from-:to' component={this.parent.parent.getMessegesComponent}></route>
         </route>
     </router>
     .

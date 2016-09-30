@@ -74,10 +74,15 @@ riot.tag2('router', '<div id="riotcontainer" class="route-container"><yield></yi
 	function changeRoute(newRoute) {
 		if (typeof newRoute === 'string') {
 			createRouteWithTagName(newRoute);
-		} else if (newRoute instanceof Promise) {
-			newRoute.then(function (tagName) {
-				createRouteWithTagName(tagName);
-			});
+		} else if (newRoute instanceof Function) {
+			var result = newRoute();
+			if (typeof result === 'string') {
+				createRouteWithTagName(newRoute);
+			} else if (result instanceof Promise) {
+				result.then(function (tagName) {
+					createRouteWithTagName(tagName);
+				});
+			}
 		}
 	}
 

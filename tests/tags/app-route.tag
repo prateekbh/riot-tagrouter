@@ -37,7 +37,7 @@
 				</route>
 				<route path='messages'>
 						<route path='/outbox' component='msg-outbox'></route>
-						<route path='/:from-:to' component={this.parent.parent.prplFunc()}></route>
+						<route path='/:from-:to' component={this.parent.parent.prplFunc}></route>
 						<route path='/..' component='msg-404'></route>
 				</route>
 				<route path='/..' component='tag-404'></route>
