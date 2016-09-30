@@ -104,7 +104,7 @@ For server side rendering allow *riot.render* to inject the your router componen
 
 > For serverside rendering we highly recommend to use the following npm module
 > [https://github.com/ilearnio/riot-ssr](https://github.com/ilearnio/riot-ssr)
-> DEMO: Coming soon
+> DEMO cum Docs: [prateekbh.github.io/riot-tagrouter](prateekbh.github.io/riot-tagrouter)
 
 ##Usage
 After NPM installation, inside the *node_modules > riot-tagrouter > build* will be the routerlib.js(ES5 verison) or router_tags_es6.js(ES6 version), feel free to use the build toold of your choice(Webpack,Grunt, gulp).

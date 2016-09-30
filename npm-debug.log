@@ -1,0 +1,133 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'publish' ]
+2 info using npm@3.8.6
+3 info using node@v6.0.0
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/prateekbh/projects/riot-tagrouter',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/prateekbh/.npm/riot-tagrouter/1.1.1/package.tgz not in flight; packing
+9 verbose correctMkdir /Users/prateekbh/.npm correctMkdir not in flight; initializing
+10 info lifecycle riot-tagrouter@1.1.1~prepublish: riot-tagrouter@1.1.1
+11 silly lifecycle riot-tagrouter@1.1.1~prepublish: no script for prepublish, continuing
+12 verbose tar pack [ '/Users/prateekbh/.npm/riot-tagrouter/1.1.1/package.tgz',
+12 verbose tar pack   '/Users/prateekbh/projects/riot-tagrouter' ]
+13 verbose tarball /Users/prateekbh/.npm/riot-tagrouter/1.1.1/package.tgz
+14 verbose folder /Users/prateekbh/projects/riot-tagrouter
+15 verbose addLocalTarball adding from inside cache /Users/prateekbh/.npm/riot-tagrouter/1.1.1/package.tgz
+16 verbose correctMkdir /Users/prateekbh/.npm correctMkdir not in flight; initializing
+17 silly cache afterAdd riot-tagrouter@1.1.1
+18 verbose afterAdd /Users/prateekbh/.npm/riot-tagrouter/1.1.1/package/package.json not in flight; writing
+19 verbose correctMkdir /Users/prateekbh/.npm correctMkdir not in flight; initializing
+20 verbose afterAdd /Users/prateekbh/.npm/riot-tagrouter/1.1.1/package/package.json written
+21 silly publish { name: 'riot-tagrouter',
+21 silly publish   version: '1.1.1',
+21 silly publish   description: 'A declarative router riotjs',
+21 silly publish   main: 'index.js',
+21 silly publish   scripts:
+21 silly publish    { build: 'grunt build',
+21 silly publish      test: './node_modules/karma/bin/karma start tests/karma.conf.js && grunt test-iso && ./node_modules/.bin/riot tests/tags/app-route.tag tests/tags/ && node ./tests/ssr.js' },
+21 silly publish   repository:
+21 silly publish    { type: 'git',
+21 silly publish      url: 'git+https://github.com/prateekbh/riot-tagrouter.git' },
+21 silly publish   keywords:
+21 silly publish    [ 'riotjs',
+21 silly publish      'riotrouter',
+21 silly publish      'router',
+21 silly publish      'isomorphism',
+21 silly publish      'server rendering',
+21 silly publish      'prpl' ],
+21 silly publish   author: { name: 'Prateek Bhatnagar' },
+21 silly publish   license: 'MIT',
+21 silly publish   bugs: { url: 'https://github.com/prateekbh/riot-tagrouter/issues' },
+21 silly publish   homepage: 'https://github.com/prateekbh/riot-tagrouter#readme',
+21 silly publish   devDependencies:
+21 silly publish    { 'babel-preset-es2015': '^6.14.0',
+21 silly publish      'expect.js': '^0.3.1',
+21 silly publish      grunt: '^1.0.1',
+21 silly publish      'grunt-babel': '^6.0.0',
+21 silly publish      'grunt-contrib-clean': '^1.0.0',
+21 silly publish      'grunt-contrib-concat': '^1.0.1',
+21 silly publish      'grunt-riot': '^0.1.6',
+21 silly publish      karma: '^1.0.0',
+21 silly publish      'karma-chrome-launcher': '^2.0.0',
+21 silly publish      'karma-mocha': '^1.0.1',
+21 silly publish      'karma-mocha-reporter': '^2.0.3',
+21 silly publish      'karma-riot': '^1.1.0',
+21 silly publish      'karma-sauce-launcher': '^1.0.0',
+21 silly publish      mocha: '^2.4.5',
+21 silly publish      'phantomjs-prebuilt': '^2.1.7',
+21 silly publish      'promise-polyfill': '^6.0.2',
+21 silly publish      riot: '^2.6.1',
+21 silly publish      'riot-ssr': '^1.1.3' },
+21 silly publish   dependencies: {},
+21 silly publish   readme: '# riot-tagrouter\n[![Build Status](https://circleci.com/gh/prateekbh/riot-tagrouter.svg?style=shield)](https://github.com/prateekbh/riot-tagrouter)\n[![Join the chat at https://gitter.im/prateekbh/riot-tagrouter](https://badges.gitter.im/prateekbh/riot-tagrouter.svg)](https://gitter.im/prateekbh/riot-tagrouter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)\n\n```shell\n    npm install --save riot-tagrouter\n```\n\nRiot js comes with a pretty rock solid [router](http://riotjs.com/api/route/) along with the library file. \nThis router however is purely imperitive and maintaining it in a large codebase can go out of hand pretty easily.\n\nriot-tagrouter is a declarative wrapper around the same, it uses the same riot router in its core and \nauto starts the riot router upon its mount.\n\n##Motivation\nThis router aims to expose a more simpler and declarative way to Router for riotjs apps that not only can work super easily out of the box, \nbut also has first class support for lazy loading of the routes and [PRPL](https://www.polymer-project.org/1.0/toolbox/server) for app.\n\n##API\nThe API is kept pretty clean and minimal, a minimal router config would be declared as follows:\n\n``` html\n    <router base-route=\'/\'>\n        <route path=\'/\' component=\'home\'></route>\n        <route path=\'/user/:user\' component=\'user-profile\'></route>\n        <route path=\'/messages\'>\n            <route path=\'/:from-:to\' component=\'msg-component\'></route>\n            <router path=\'/..\' component={msg-404}/>\n        </route>\n        <router path=\'/..\' component={tag-404}/>\n    </router>\n```\n\n> in the above example base-route will be the route base customizable as per the [riot router](http://riotjs.com/api/route/), this sets the root url for your entire app.\n\n\nThis router as promised also has first class support for lazy loaded routes again in a declarative way. The component attribute of the router takes one of the two parameter\n\n 1. A string type name of the component to be mounted\n 2. A function which either returns a string or a promise which at the end needs to be resolved with a string type name of the component\n\n``` html\n\t<router base-route=\'/\'>\n        <route path=\'/\' component=\'home\'></route>\n        <route path=\'/user/*\' component=\'user-profile\'></route>\n        <route path=\'/messages\'>\n            <route path=\'/:from-:to\' component={this.parent.parent.getMessegesComponent}></route>\n        </route>\n    </router>\n    .\n    .\n    .\n    <script>\n\t    this.getMessegesComponent = function (){\n\t\t    return new Promise((resolve,reject){\n\t\t\t    //some webpack or require magic here to load the tags now\n\t\t\t    resolve(\'msg-component\');\n\t\t    });\n\t\t}\n    </script>\n```\n\n> see [Lazy Loading your Riotjs SPA](medium.com/@prateek.bh/lazy-loading-your-riotjs-spa-5f4e73011663) for hints on webpack stuff\n\n##Custom navigation element\n*<navigate>* element bundled with this package uses *riot.route* internally to navigate to any route, for a11y purpose all navigate elements will be \'<a>\' tags.  \n\n``` html\n    <navigate to=\'/user/john\' title=\'John\' replace={true}>\n        <svg>\n        .\n        .\n        .\n        </svg>\n    </navigate>\n```\n##Route values to components\nThe component specified in the route tag(or passed via promise) will recieve all the route params in opts of the component.\n\ne.g. in above example, path \'/user/:user\' the component \'user-profile\' wil recieve an opts \'user\' with the route value.\n\n##Events\nFollowing two events will be published on \'Router\' tag\'s tag defination(using .trigger) and also via .opts (i.e. \'on-\' attributes)\n\n1. *Route Changed*: Whenever the route is changing a \'routeChange\' event will be triggered on the tag implementation and also if a function is passed to \'on-routechange\' attribute\nthen that will be called too.\n2. *Tag not found*: Whenever a while mounting a tag is not found a \'tagNotFound\' event will be triggered on the tag implementation and also if a function is passed to \'on-tagnotfound\' attribute\nthen that will be called too.\n\n##Isomorphism\nNow obviosly, time to first meaningful paint is the new perf metrics we cannot miss the importance of, hence server rendered streamed HTML is something of utmost importance for riot-tagrouter.\n\nThat brings in the need of Isomorphism from the router\'s side. We aim at making this a super easy process for the users.\nFor server side rendering allow *riot.render* to inject the your router component into your markup. \n\n``` javascript\n    var riot = require(\'riot\');\n    var appRoutingTag = require(\'path to tag which has router implementations\');\n    //console.log or res.render or how ever u wanna do it\n    res.render(\'index\',{\n        routerMarkup: riot.render(\'app-router\');//app-router be the name of the tag in which you encapsulate the router tag\n    });\n```\n\n> For serverside rendering we highly recommend to use the following npm module\n> [https://github.com/ilearnio/riot-ssr](https://github.com/ilearnio/riot-ssr)\n> DEMO: Coming soon\n\n##Usage\nAfter NPM installation, inside the *node_modules > riot-tagrouter > build* will be the routerlib.js(ES5 verison) or router_tags_es6.js(ES6 version), feel free to use the build toold of your choice(Webpack,Grunt, gulp).\n\nAlso a raw(Un Rioted and ES6) version of all the tags lie in *tags* folder if you want a specific loader to precess it for your Webpack.  \n\n###Note\n 1. All \'*:slugs*\' are replaced by \'\\*\' internally, you can however use all the rules that you can use in riot router, however url params will be passed as opts only for \'*:slug*\' keys.\n 2. It is highly recommended to keep your router instance inside another riot tag when you are planning a lazy loading component, it will help you pass component as a function.',
+21 silly publish   readmeFilename: 'README.md',
+21 silly publish   gitHead: '44a61763a3e71aa5a49d21dd797545d6d78f522e',
+21 silly publish   _id: 'riot-tagrouter@1.1.1',
+21 silly publish   _shasum: '706250918a80709e15c12e1e9ac1f72059e43d0f',
+21 silly publish   _from: '.' }
+22 verbose getPublishConfig undefined
+23 silly mapToRegistry name riot-tagrouter
+24 silly mapToRegistry using default registry
+25 silly mapToRegistry registry https://registry.npmjs.org/
+26 silly mapToRegistry data Result {
+26 silly mapToRegistry   raw: 'riot-tagrouter',
+26 silly mapToRegistry   scope: null,
+26 silly mapToRegistry   name: 'riot-tagrouter',
+26 silly mapToRegistry   rawSpec: '',
+26 silly mapToRegistry   spec: 'latest',
+26 silly mapToRegistry   type: 'tag' }
+27 silly mapToRegistry uri https://registry.npmjs.org/riot-tagrouter
+28 verbose publish registryBase https://registry.npmjs.org/
+29 silly publish uploading /Users/prateekbh/.npm/riot-tagrouter/1.1.1/package.tgz
+30 verbose request uri https://registry.npmjs.org/riot-tagrouter
+31 verbose request sending authorization for write operation
+32 info attempt registry request try #1 at 3:05:23 PM
+33 verbose request using bearer token for auth
+34 verbose request id 9eec58e868b6f71f
+35 http request PUT https://registry.npmjs.org/riot-tagrouter
+36 http 403 https://registry.npmjs.org/riot-tagrouter
+37 verbose headers { 'content-type': 'application/json',
+37 verbose headers   'cache-control': 'max-age=300',
+37 verbose headers   'content-length': '95',
+37 verbose headers   'accept-ranges': 'bytes',
+37 verbose headers   date: 'Fri, 30 Sep 2016 09:35:25 GMT',
+37 verbose headers   via: '1.1 varnish',
+37 verbose headers   connection: 'keep-alive',
+37 verbose headers   'x-served-by': 'cache-hkg6821-HKG',
+37 verbose headers   'x-cache': 'MISS',
+37 verbose headers   'x-cache-hits': '0',
+37 verbose headers   'x-timer': 'S1475228125.191782,VS0,VE482',
+37 verbose headers   vary: 'Accept-Encoding' }
+38 verbose request invalidating /Users/prateekbh/.npm/registry.npmjs.org/riot-tagrouter on PUT
+39 error publish Failed PUT 403
+40 verbose stack Error: "You cannot publish over the previously published version 1.1.1." : riot-tagrouter
+40 verbose stack     at makeError (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+40 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:252:14)
+40 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+40 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:199:22)
+40 verbose stack     at emitTwo (events.js:106:13)
+40 verbose stack     at Request.emit (events.js:191:7)
+40 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1036:10)
+40 verbose stack     at emitOne (events.js:101:20)
+40 verbose stack     at Request.emit (events.js:188:7)
+40 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:963:12)
+41 verbose statusCode 403
+42 verbose pkgid riot-tagrouter
+43 verbose cwd /Users/prateekbh/projects/riot-tagrouter
+44 error Darwin 15.6.0
+45 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "publish"
+46 error node v6.0.0
+47 error npm  v3.8.6
+48 error code E403
+49 error "You cannot publish over the previously published version 1.1.1." : riot-tagrouter
+50 error If you need help, you may report this error at:
+50 error     <https://github.com/npm/npm/issues>
+51 verbose exit [ 1, true ]
