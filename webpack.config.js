@@ -3,10 +3,10 @@ var webpack = new require("webpack");
  
 module.exports = {
 			entry: {
+							vendor: "./scripts/vendor.js",
 							home: "./scripts/home.js",
 							apis: "./scripts/api.js",
-							app: "./scripts/app.js",
-							vendor: "./scripts/vendor.js"
+							app: "./scripts/app.js"
 			},
 		module:{
 			loaders: [
@@ -37,6 +37,6 @@ module.exports = {
         // Make sure to use [name] or [id] in output.filename
         //  when using multiple entry points
         filename: "./build/[name].bundle.js",
-        chunkFilename: "[id].bundle.js"
+        chunkFilename: "./build/[name].bundle.js"
     }
 }

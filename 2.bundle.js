@@ -1,12 +1,5 @@
-webpackJsonp([0],[
-/* 0 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var apiTag = __webpack_require__(1);
-
-/***/ },
+webpackJsonp([2],[
+/* 0 */,
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
