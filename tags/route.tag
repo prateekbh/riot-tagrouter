@@ -1,5 +1,5 @@
 <route>
-		<yield></yield>
+		<yield/>
 		<script>
 				this.on('mount',(e) => {
 						if(Object.keys(this.tags).length===0){

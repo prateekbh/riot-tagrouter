@@ -1,8 +1,8 @@
 <router>
-    <div id="riotcontainer" class='route-container'>
-			<yield></yield>
+    <div ref="riotcontainer" class='route-container'>
+			<yield/>
     </div>
-    <div id="riotroot" class="riot-root">
+    <div ref="riotroot" class="riot-root">
     </div>
     <script>
 				var self = this;
@@ -132,11 +132,11 @@
 				this.on('mount',(e)=>{
 						//remove the ugly routes from DOM unless flag says not to
 						if(!this.opts.showRoutes){
-							var routeContainer = this.riotcontainer;
+							var routeContainer = this.refs.riotcontainer;
 							routeContainer.remove && routeContainer.remove();
 						}
 
-						$appRoot = this.riotroot;
+						$appRoot = this.refs.riotroot;
 
 						this.opts.baseRoute && riot.route.base(this.opts.baseRoute);
 

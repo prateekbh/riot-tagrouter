@@ -18,11 +18,12 @@ var customLaunchers = {
 
 module.exports = function(config) {
   config.set({
-    frameworks: ['mocha', 'riot'],
+    frameworks: ['mocha', 'riot', 'browserify'],
     plugins: [
       'karma-mocha',
       'karma-mocha-reporter',
-      'karma-riot'
+      'karma-riot',
+      'karma-browserify'
     ],
     files: [
       '../node_modules/expect.js/index.js',
@@ -32,6 +33,7 @@ module.exports = function(config) {
       'specs.js'
     ],
     preprocessors: {
+      '**/*.js': ['browserify'],
       '**/*.tag': ['riot']
     },
     browsers: ['Chrome'],

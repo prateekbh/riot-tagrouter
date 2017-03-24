@@ -1,8 +1,8 @@
-var Promise = require("promise-polyfill"); var riot = require("riot");'use strict';
+var Promise = require("promise-polyfill"); var riot = require("riot"); riot.route = require("riot-route");'use strict';
 
-riot.tag2('navigate', '<a href="{document.querySelector(\'router\').getBasePath()+opts.to}" onclick="{nagivateToRoute}"><yield></yield></a>', '', '', function (opts) {
+riot.tag2('navigate', '<a href="{document.querySelector(\'router\').getBasePath()+opts.to}" onclick="{navigateToRoute}"><yield></yield></a>', '', '', function (opts) {
 	var self = this;
-	this.nagivateToRoute = function (e) {
+	this.navigateToRoute = function (e) {
 		e.preventDefault();
 		riot.route(self.opts.to, self.opts.title || null, self.opts.replace ? true : false);
 	};
@@ -20,7 +20,7 @@ riot.tag2('route', '<yield></yield>', '', '', function (opts) {
 		this.parent && this.parent.setRoute && this.parent.setRoute(this.opts.path + path, component);
 	};
 });
-riot.tag2('router', '<div id="riotcontainer" class="route-container"><yield></yield></div><div id="riotroot" class="riot-root"></div>', '', '', function (opts) {
+riot.tag2('router', '<div ref="riotcontainer" class="route-container"><yield></yield></div><div ref="riotroot" class="riot-root"></div>', '', '', function (opts) {
 	var _this2 = this;
 
 	var self = this;
@@ -55,7 +55,7 @@ riot.tag2('router', '<div id="riotcontainer" class="route-container"><yield></yi
 
 			setTimeout(function () {
 				throw e;
-			}, 0);
+			}, 3000);
 		}
 		if (!mountedTag || mountedTag.length === 0) {
 			self.trigger('tagNotFound', tagName);
@@ -137,11 +137,11 @@ riot.tag2('router', '<div id="riotcontainer" class="route-container"><yield></yi
 	this.on('mount', function (e) {
 
 		if (!_this2.opts.showRoutes) {
-			var routeContainer = _this2.riotcontainer;
+			var routeContainer = _this2.refs.riotcontainer;
 			routeContainer.remove && routeContainer.remove();
 		}
 
-		$appRoot = _this2.riotroot;
+		$appRoot = _this2.refs.riotroot;
 
 		_this2.opts.baseRoute && riot.route.base(_this2.opts.baseRoute);
 
@@ -173,7 +173,7 @@ riot.tag2('tag-error', '<h1>check console for error</h1>', '', '', function(opts
 		});
 });
 
-riot.tag2('app-route', '<router show-routes="{true}" on-routechange="{fireRouteChange}" on-tagnotfound="{fireTagnotfound}"> <route path="/" component="home"></route> <route path="/error" component="tag-error"></route> <route path="user"> <route path="/profile/:user" component="user-component"></route> </route> <route path="messages"> <route path="/outbox" component="msg-outbox"></route> <route path="/:from-:to" component="{this.parent.parent.prplFunc()}"></route> <route path="/.." component="msg-404"></route> </route> <route path="/.." component="tag-404"></route> </router>', '', '', function(opts) {
+riot.tag2('app-route', '<router show-routes="{true}" on-routechange="{fireRouteChange}" on-tagnotfound="{fireTagnotfound}"> <route path="/" component="home"></route> <route path="/error" component="tag-error"></route> <route path="user"> <route path="/profile/:user" component="user-component"></route> </route> <route path="messages"> <route path="/outbox" component="msg-outbox"></route> <route path="/:from-:to" component="{this.parent.parent.prplFunc}"></route> <route path="/.." component="msg-404"></route> </route> <route path="/.." component="tag-404"></route> </router>', '', '', function(opts) {
 			var self=this;
 			this.prplFunc = function(){
 				return new Promise(function(resolve, reject){

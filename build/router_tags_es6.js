@@ -1,6 +1,6 @@
-riot.tag2('navigate', '<a href="{document.querySelector(\'router\').getBasePath()+opts.to}" onclick="{nagivateToRoute}"><yield></yield></a>', '', '', function(opts) {
+riot.tag2('navigate', '<a href="{document.querySelector(\'router\').getBasePath()+opts.to}" onclick="{navigateToRoute}"><yield></yield></a>', '', '', function(opts) {
         var self = this;
-        this.nagivateToRoute = function(e){
+        this.navigateToRoute = function(e){
             e.preventDefault();
             riot.route(self.opts.to,self.opts.title||null,self.opts.replace?true:false);
         }
@@ -16,7 +16,7 @@ riot.tag2('route', '<yield></yield>', '', '', function(opts) {
 					this.parent && this.parent.setRoute && this.parent.setRoute(this.opts.path + path, component );
 				}
 });
-riot.tag2('router', '<div id="riotcontainer" class="route-container"><yield></yield></div><div id="riotroot" class="riot-root"></div>', '', '', function(opts) {
+riot.tag2('router', '<div ref="riotcontainer" class="route-container"><yield></yield></div><div ref="riotroot" class="riot-root"></div>', '', '', function(opts) {
 				var self = this;
 				var $appRoot = null;
 				var currTag = null;
@@ -131,11 +131,11 @@ riot.tag2('router', '<div id="riotcontainer" class="route-container"><yield></yi
 				this.on('mount',(e)=>{
 
 						if(!this.opts.showRoutes){
-							var routeContainer = this.riotcontainer;
+							var routeContainer = this.refs.riotcontainer;
 							routeContainer.remove && routeContainer.remove();
 						}
 
-						$appRoot = this.riotroot;
+						$appRoot = this.refs.riotroot;
 
 						this.opts.baseRoute && riot.route.base(this.opts.baseRoute);
 

@@ -30,7 +30,7 @@ module.exports = function(grunt) {
 				concat_forisomorphism:{
 							options: {
 								stripBanners: true,
-								banner: 'var Promise = require("promise-polyfill"); var riot = require("riot");',
+								banner: 'var Promise = require("promise-polyfill"); var riot = require("riot"); riot.route = require("riot-route");',
 							},
 							src: ['build/routerlib.js','tests/tags/app-route.js'],
 							dest: 'tests/isomorphism.js',
