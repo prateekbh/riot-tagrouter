@@ -59,5 +59,10 @@
 				self.trigger('tagNotFound');
 			}
 
+			setTimeout(function() {
+	      // triggering the "ready" event will resolve the promise
+	      this.trigger('ready')
+	    }.bind(this), 500);
+
 		</script>
 </app-route>
