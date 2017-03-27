@@ -1,6 +1,9 @@
+riot.route = require('riot-route')
+
 /*setup router and app-route*/
 var _appTag = document.createElement('app-route');
 document.body.appendChild(_appTag);
+
 riot.mount('app-route');
 
 /* end setup */

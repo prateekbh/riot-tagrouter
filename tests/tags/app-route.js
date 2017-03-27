@@ -36,4 +36,9 @@ riot.tag2('app-route', '<router show-routes="{true}" on-routechange="{fireRouteC
 				self.trigger('tagNotFound');
 			}
 
+			setTimeout(function() {
+
+	      this.trigger('ready')
+	    }.bind(this), 500);
+
 });
