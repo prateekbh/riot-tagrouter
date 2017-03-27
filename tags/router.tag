@@ -8,7 +8,7 @@
 				var self = this;
 				var $appRoot = null;
 				var currTag = null;
-				
+
 				var _isRouteRendedered = false;
 				var routeParams = {};
 
@@ -30,7 +30,7 @@
 						var mountedTag;
 						try{
 							if(typeof window === 'undefined'){
-								//cant call riot.mount on server 
+								//cant call riot.mount on server
 								$appRoot.innerHTML = riot.render(tagName,routeParams);
 							} else {
 								mountedTag = riot.mount(tagName + '.route-' + tagName, routeParams);
@@ -38,9 +38,7 @@
 						}
 						catch(e){
 							//this doesn't let the router die and also does not modify any errors from tags
-							setTimeout(function(){
-								throw(e);
-							},0);
+							console.error(e);
 						}
 						if(!mountedTag || mountedTag.length === 0){
 								self.trigger('tagNotFound',tagName);
@@ -48,7 +46,7 @@
 									self.opts['onTagnotfound'](tagName);
 								}
 								//right now throwing this error halts the entire router
-								//throw (new Error('Riot Element Not Found')); 
+								//throw (new Error('Riot Element Not Found'));
 						}
 						else{
 								self.trigger('routeChanged',tagName);
@@ -70,7 +68,7 @@
 									result.then(tagName  => {
 										createRouteWithTagName(tagName);
 									});
-								} 
+								}
 						}
 				}
 
@@ -87,7 +85,7 @@
 
 								//converting to riot router understandable format
 								path = path.replace(tokenRegExp,'*');
-								
+
 								/* CODE FOR ISOMORPHISM */
 								if(typeof window === 'undefined' && !_isRouteRendedered){
 									var serverSidePath = new RegExp(path.replace(/\*/g,'([^/?#]+?)').replace(/\.\./g,'.*')+'$');
@@ -119,7 +117,7 @@
 											});
 
 											//change route
-											changeRoute(component); 
+											changeRoute(component);
 									});
 
 									//start the router

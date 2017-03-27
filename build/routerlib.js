@@ -53,9 +53,7 @@ riot.tag2('router', '<div ref="riotcontainer" class="route-container"><yield></y
 			}
 		} catch (e) {
 
-			setTimeout(function () {
-				throw e;
-			}, 0);
+			console.error(e);
 		}
 		if (!mountedTag || mountedTag.length === 0) {
 			self.trigger('tagNotFound', tagName);
